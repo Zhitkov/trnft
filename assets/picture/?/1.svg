@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="165.94984mm"
+   height="65.468811mm"
+   viewBox="0 0 165.94984 65.468811"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   sodipodi:docname="1.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="true"
+     inkscape:zoom="0.41335578"
+     inkscape:cx="414.89682"
+     inkscape:cy="341.11051"
+     inkscape:window-width="1366"
+     inkscape:window-height="703"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid2467"
+       originx="-51.00848"
+       originy="-58.208332" />
+  </sodipodi:namedview>
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-51.008484,-58.208332)">
+    <rect
+       style="fill:#ffffff;stroke-width:0.264583"
+       id="rect49"
+       width="165.94984"
+       height="65.468811"
+       x="-216.95833"
+       y="58.208332"
+       transform="scale(-1,1)" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="-175.22107"
+       y="93.699669"
+       id="text1571"
+       transform="scale(-1,1)"><tspan
+         sodipodi:role="line"
+         id="tspan1569"
+         style="stroke-width:0.264583"
+         x="-175.22107"
+         y="93.699669">Какая-то инфа</tspan></text>
+  </g>
+</svg>
