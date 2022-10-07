@@ -80,7 +80,10 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['veterans']),
+    ...mapGetters(['byPath']),
+    veterans() {
+      return this.byPath('humanCapital.veterans')
+    },
     filteredVeterans() {
       var users_array = this.veterans,
         searchName = this.searchName

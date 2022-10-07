@@ -29,7 +29,6 @@
 </template>
 
 <script>
-import { exit } from 'process'
 
 export default {
   data() {
@@ -46,9 +45,6 @@ export default {
       } else {
         this.streamArr.push(item)
       }
-      //   if (this.streamArr.indexOf(item) !== -1) {
-      //     return (this.streamArr = this.streamArr.splice(this.streamArr.indexOf(item), 1))
-      //   }
     },
   },
 }

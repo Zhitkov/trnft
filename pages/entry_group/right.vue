@@ -9,7 +9,10 @@ import { mapGetters } from 'vuex'
 
 export default {
   computed: {
-    ...mapGetters(['entryGroup']),
+    ...mapGetters({videoByPath: 'video/byPath'}),
+    entryGroup() {
+      return this.videoByPath('entryGroup')
+    }
   },
 }
 </script>

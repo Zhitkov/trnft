@@ -9,7 +9,7 @@
     <br>
 
     <div v-for="(item, index) in ['past', 'present', 'present2', 'future']" :key="index">
-      <button @click="CHANGE_TECHNOLOGY_PERIOD(item)">
+      <button @click="CHANGE_BY_PATH('technology.period', item)">
         {{ item }}
       </button>
     </div>
@@ -28,10 +28,13 @@ import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   computed: {
-    ...mapGetters(['technology']),
+    ...mapGetters(['byPath']),
+    technology() {
+      return this.byPath('technology')
+    }
   },
   methods: {
-    ...mapMutations(['CHANGE_TECHNOLOGY_PERIOD']),
+    ...mapMutations(['CHANGE_BY_PATH']),
   },
 }
 </script>

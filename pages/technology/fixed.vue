@@ -37,7 +37,10 @@ export default {
         ? 3
         : 'ОШИБКА'
     },
-    ...mapGetters(['technology']),
+    ...mapGetters(['byPath']),
+    technology() {
+      return this.byPath('technology')
+    }
   },
 }
 </script>

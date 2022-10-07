@@ -1,15 +1,15 @@
 <template>
   <div class="all-screen">
-      <!-- style="display: none" -->
-    
+    <!-- style="display: none" -->
+    {{ samara.start }}
     <div v-for="(video, index) in samara.video" :key="index">
       <v-idle
-      @idle="IDLE_SAMARA(true)"
-      :loop="false"
-      :duration="video.endTime + 3"
-      :events="['mousemove', 'keypress', 'click', 'touchmove', 'touchstart', 'touchmove', 'scroll']"
-      v-if="!samara.idle && (index === samara.counter)"
-    /> 
+        @idle="CHANGE_BY_PATH(['samara.idle', true])"
+        :loop="false"
+        :duration="video.endTime + 3"
+        :events="['']"
+        v-if="!samara.idle && index === samara.counter"
+      />
     </div>
     <div class="">
       Здесь играет ролик, выбранный с помощью кнопок, на стенде Самара
@@ -19,7 +19,11 @@
     </div>
     Сейчас Выбран {{ samara.counter }}
     <!-- <div class="" v-show="!samara.idle"> -->
-    <div v-show="!samara.idle" v-for="(video, index) in samara.video" :key="index">
+    <div
+      v-show="!samara.idle"
+      v-for="(video, index) in videoSamara.video"
+      :key="index"
+    >
       <ModuleVideo
         v-if="index === samara.counter"
         class="all-size"
@@ -28,8 +32,13 @@
         @ended="changeSamara()"
       ></ModuleVideo>
     </div>
-<!-- </div> -->
-<img class="all-screen" v-show="samara.idle" src="~/assets/picture/logo.png" alt="">
+    <!-- </div> -->
+    <img
+      class="all-screen"
+      v-show="samara.idle"
+      src="~/assets/picture/logo.png"
+      alt=""
+    />
   </div>
 </template>
 
@@ -38,18 +47,18 @@ import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   computed: {
-    ...mapGetters(['samara']),
+    ...mapGetters({ byPath: 'byPath', videoSamara: 'video/samara' }),
+    samara() {
+      return this.byPath('samara')
+    },
   },
   methods: {
-    ...mapMutations(['CHANGE_SAMARA_VIDEO', 'IDLE_SAMARA']),
+    ...mapMutations(['CHANGE_SAMARA_VIDEO','CHANGE_BY_PATH']),
     changeSamara() {
-      if(this.samara.start) {
+      if (this.samara.start) {
         this.CHANGE_SAMARA_VIDEO(this.samara.counter + 1)
       }
     },
-    samaraIdle() {
-
-    }
   },
 }
 </script>

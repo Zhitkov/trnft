@@ -92,7 +92,13 @@ export default {
         ? false
         : 'ОШИБКА'
     },
-    ...mapGetters(['technology', 'smallTablet']),
+    ...mapGetters(['byPath']),
+    technology() {
+      return this.byPath('technology')
+    },
+    smallTablet() {
+      return this.byPath('smallTablet')
+    }
   },
 }
 </script>

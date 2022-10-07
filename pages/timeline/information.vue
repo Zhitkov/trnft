@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   // data() {
@@ -22,9 +22,19 @@ export default {
   //   }
   // },
   computed: {
-    ...mapGetters(['timeline']),
+    ...mapGetters({byPath: 'byPath', videoByPath: 'video/byPath'}),
+
+    timeline() {
+      return this.videoByPath('timeline')
+    },
+    timeline() {
+      return this.byPath('timeline')
+    },
   },
   methods: {
+    ...mapMutations([
+      'CHANGE_TIMELINE_VIDEO'
+    ]),
     changeTimeline() {
       this.CHANGE_TIMELINE_VIDEO(this.timeline.counter + 1)
     },

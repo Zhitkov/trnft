@@ -11,7 +11,10 @@ import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   computed: {
-    ...mapGetters(['timeline']),
+    ...mapGetters(['byPath']),
+    timeline() {
+      return this.byPath('timeline')
+    },
   },
   methods: {
     ...mapMutations(['CHANGE_BY_PATH'])

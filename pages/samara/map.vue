@@ -9,7 +9,10 @@ import { mapGetters } from 'vuex'
 
 export default {
   computed: {
-    ...mapGetters(['samara']),
+    ...mapGetters(['byPath']),
+    samara() {
+      return this.byPath('samara')
+    }
   },
 }
 </script>

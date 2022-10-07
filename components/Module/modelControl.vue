@@ -33,14 +33,14 @@ export default {
   },
   watch: {
     modelValue(mv) {
-      this.CHANGE_MODEL_VALUE(mv)
+      this.CHANGE_BY_PATH('smallTablet.modelValue', mv)
     },
   },
   computed: {
     // ...mapGetters(['smallTablet']),
   },
   methods: {
-    ...mapMutations(['CHANGE_MODEL_VALUE']),
+    ...mapMutations(['CHANGE_BY_PATH']),
   },
 }
 </script>

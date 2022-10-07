@@ -3,7 +3,7 @@
     <div v-for="(video, index) in timeline.map" :key="index">
       {{video.year}}
     <ModuleVideo
-      v-if="index === timeline.counter"
+      v-if="index === videoTimeline.counter"
       :videoSrc="video.src"
       :loop="false"
       @ended="changeTimeline()"
@@ -23,7 +23,13 @@ export default {
   //   }
   // },
   computed: {
-    ...mapGetters(['timeline']),
+    ...mapGetters({videoByPath: 'video/byPath', byPath: 'byPath'}),
+    timeline() {
+      return this.byPath('timeline')
+    },
+    videoTimeline() {
+      return this.videoByPath('timeline')
+    },
   },
   methods: {
     ...mapMutations(['CHANGE_TIMELINE_VIDEO']),

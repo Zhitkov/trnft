@@ -71,11 +71,7 @@ export default {
     }),
   },
   methods: {
-    ...mapMutations([
-      'CHANGE_SAMARA_VIDEO',
-      'CHANGE_TIMELINE_VIDEO',
-      'CHANGE_TECHNOLOGY_PERIOD',
-    ]),
+    ...mapMutations(['CHANGE_SAMARA_VIDEO','CHANGE_TIMELINE_VIDEO', 'CHANGE_BY_PATH']),
     returnToMain() {
       this.array = this.tablet.main
       this.title = ''
@@ -96,7 +92,7 @@ export default {
             this.CHANGE_TIMELINE_VIDEO(btn.link)
             break
           case 'changeScreenPosition':
-            this.CHANGE_TECHNOLOGY_PERIOD(btn.link)
+            this.CHANGE_BY_PATH(technology.period, btn.link)
             break
 
           default:
