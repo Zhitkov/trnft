@@ -22,7 +22,7 @@ export default {
     const api = 'http://localhost:8000'
     var a = [];
     for (const year of ['1936', '1953']) {
-      const video = await $axios.$get(api + '/api/timeline/1936/1/').then((response) => {
+      const video = await $axios.$get(api + '/api/timeline/'+ year +'/1/').then((response) => {
         console.log(response, 'response.data');
         return api + response.current_video
       })

@@ -23,7 +23,7 @@ export default {
     var a = []
     for (const year of ['1936', '1953']) {
       const video = await $axios
-        .$get(api + '/api/timeline/1936/2/')
+        .$get(api + '/api/timeline/'+year+'/2/')
         .then((response) => {
           console.log(response, 'response.data')
           return api + response.current_video
