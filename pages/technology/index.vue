@@ -9,7 +9,7 @@
     <br>
 
     <div v-for="(item, index) in ['past', 'present', 'present2', 'future']" :key="index">
-      <button @click="CHANGE_BY_PATH('technology.period', item)">
+      <button @click="CHANGE_BY_PATH(['technology.period', item])">
         {{ item }}
       </button>
     </div>

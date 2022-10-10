@@ -1,10 +1,11 @@
 <template>
   <div>
-    <div v-for="(video, index) in timeline.map" :key="index">
+    <div v-for="(video, index) in videoTimeline" :key="index">
       {{video.year}}
+      {{ newVideos[index] || videoTimeline[index].video2 }}
     <ModuleVideo
-      v-if="index === videoTimeline.counter"
-      :videoSrc="video.src"
+      v-if="index === timeline.counter"
+      :videoSrc="newVideos[index]||videoTimeline[index].video1"
       :loop="false"
       @ended="changeTimeline()"
       :pause="timeline.pause"
@@ -17,6 +18,18 @@
 import { mapGetters, mapMutations } from 'vuex'
 
 export default {
+  async asyncData({ $axios }) {
+    const api = 'http://localhost:8000'
+    var a = [];
+    for (const year of ['1936', '1953']) {
+      const video = await $axios.$get(api + '/api/timeline/1936/1/').then((response) => {
+        console.log(response, 'response.data');
+        return api + response.current_video
+      })
+      a.push(video);
+    }
+    return { newVideos: a }
+  },
   // data() {
   //   return {
   //     asd: true,
@@ -28,7 +41,7 @@ export default {
       return this.byPath('timeline')
     },
     videoTimeline() {
-      return this.videoByPath('timeline')
+      return this.videoByPath('timeline.video')
     },
   },
   methods: {

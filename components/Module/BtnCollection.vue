@@ -43,7 +43,7 @@ export default {
 }
 .small-logo {
   width: 30vw;
-  height: 20vh;
+  height: 15vh;
 }
 .title {
   border-top: 2px #025692 solid;
@@ -65,7 +65,7 @@ export default {
   background-repeat: no-repeat;
 }
 .btnwitharrow {
-  background-image: url('~/assets/creative/btnwitharrow.svg');
+  background-image: url('~/assets/creative/btnwitharrow.png');
 }
 .rbbtn {
   background-image: url('~/assets/creative/rbbtn.svg');
@@ -73,10 +73,10 @@ export default {
 .rbsmbtn {
   background-image: url('~/assets/creative/rbsmbtn.svg');
 }
-.odd {
+.oddBtns {
   justify-content: space-around;
 }
-.even {
+.evenBtns {
   justify-content: space-around;
 }
 </style>

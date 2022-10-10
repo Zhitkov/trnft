@@ -100,10 +100,7 @@ export const getters = {
   },
 }
 export const actions = {
-  async changeTimelineVideo({ commit }) {
-    const video = await this.$axios.$get('')
-    commit('CHANGE_TIMELINE_VIDEO', video)
-  },
+  
 }
 
 export const mutations = {

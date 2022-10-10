@@ -17,6 +17,7 @@ export default {}
 .all-size {
   height: 100%;
   width: 100%;
+  /* background-image: url('~/assets/creative/fon.png'); */
 }
 .flex-center {
   display: flex;
@@ -41,8 +42,9 @@ div.mx-video-player__mask-progress.mx-video-player__mask-progress_show {
 }
 
 .corner-decoration {
-  background-image: url('~/assets/creative/rbcornert.svg'), url('~/assets/creative/rbcornerb.svg');
-  background-position: left top, right bottom;
+  background-image: url('~/assets/creative/rbcornert.png'), url('~/assets/creative/rbcornerb.png'), url('~/assets/creative/fon.png');
+  background-size:350px, 350px, 100vw 100vh ;
+  background-position: left top, right bottom, center;
   background-repeat: no-repeat, no-repeat;
 }
 </style>

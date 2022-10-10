@@ -1,9 +1,5 @@
 <template>
   <div class="flex-center all-screen corner-decoration">
-    <!-- {{ btnKeys }} -->
-    <br />
-    <!-- {{ title }} -->
-    <br />
     <img
       @click="returnToMain()"
       v-show="showControl"
@@ -31,7 +27,7 @@ export default {
     return {
       img: 'rbbtn',
       array: [],
-      style: 'odd',
+      style: 'oddBtns',
       showControl: false,
     }
   },

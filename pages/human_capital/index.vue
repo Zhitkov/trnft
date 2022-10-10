@@ -1,9 +1,5 @@
 <template>
   <div class="flex-center all-screen corner-decoration">
-    <!-- {{ btnKeys }} -->
-    <br />
-    <!-- {{ title }} -->
-    <br />
     <img
     @click="returnToMain()"
       v-show="title"
@@ -30,7 +26,7 @@ export default {
     return {
       img: 'btnwitharrow',
       array: [],
-      style: 'odd',
+      style: 'oddBtns',
       title: '',
     }
   },
@@ -58,7 +54,7 @@ export default {
       if (this.humanCapital[btn.link]) {
         this.array = this.humanCapital[btn.link]
         this.title = btn.name.replaceAll(' <br>', '')
-        this.style = this.humanCapital[btn.link].length % 2 ? 'odd' : 'even'
+        this.style = this.humanCapital[btn.link].length % 2 ? 'oddBtns' : 'evenBtns'
       } else {
         this.$router.push({ path: '/human_capital/' + btn.link })
       }

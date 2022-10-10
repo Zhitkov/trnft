@@ -50,44 +50,44 @@ export default {
   },
   methods: {
     onPlay(info) {
-      console.log('视频开始播放了...', info.currentTime)
+      console.log('1', info.currentTime)
     },
     onPause(info) {
-      console.log('视频暂停播放了...', info.currentTime)
+      console.log('2', info.currentTime)
     },
     onFinish() {
-      console.log('视频播放完毕了...')
+      console.log('3')
       this.$emit('ended')
     },
     onRateChange(rate) {
-      console.log('视频播放速率变化了，当前速率是', rate)
+      console.log('4', rate)
     },
     onVolumeChange(volume) {
-      console.log('视频音量变化了，当前音量是', volume)
+      console.log('5', volume)
     },
     onProgressChange(progress) {
-      console.log('视频进度变化了，当前进度是', progress)
+      console.log('5', progress)
     },
     onEnterFullscreen() {
-      console.log('进入全屏模式')
+      console.log('6')
     },
     onCancelFullscreen() {
-      console.log('退出全屏模式')
+      console.log('7')
     },
     onEnterWebFullscreen() {
-      console.log('进入网页全屏')
+      console.log('8')
     },
     onCancelWebFullscreen() {
-      console.log('退出网页全屏')
+      console.log('9')
     },
     onSeeked(info) {
-      console.log('跳转操作结束', info.currentTime)
+      console.log('10', info.currentTime)
     },
     onDownloadResource() {
-      console.log('加载资源')
+      console.log('11')
     },
     onTimeUpdate(info) {
-      console.log('视频播放中', info.currentTime)
+      console.log('12', info.currentTime)
     },
   },
   // computed: {

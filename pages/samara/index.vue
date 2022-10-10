@@ -5,13 +5,7 @@
     <NuxtLink to="/tablet">планшете</NuxtLink>)
 
     <div v-for="(item, index) in 4" :key="index">
-      <button
-        @click="
-          CHANGE_SAMARA_VIDEO(index)
-          CHANGE_BY_PATH(['samara.idle', false])
-          CHANGE_BY_PATH(['samara.start', false])
-        "
-      >
+      <button @click="pusk()">
         {{ '(' + index + ')Этап' + (index + 1) }}
       </button>
     </div>
@@ -27,16 +21,21 @@ import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   computed: {
-    ...mapGetters({videoByPath: 'video/byPath', byPath: 'byPath'}),
+    ...mapGetters({ videoByPath: 'video/byPath', byPath: 'byPath' }),
     samara() {
       return this.byPath('samara')
     },
     videoSamara() {
       return this.videoByPath('samara')
-    }
+    },
   },
   methods: {
-    ...mapMutations(['CHANGE_BY_PATH','CHANGE_SAMARA_VIDEO']),
+    ...mapMutations(['CHANGE_BY_PATH', 'CHANGE_SAMARA_VIDEO']),
+    pusk() {
+      CHANGE_SAMARA_VIDEO(index)
+      CHANGE_BY_PATH(['samara.idle', false])
+      CHANGE_BY_PATH(['samara.start', false])
+    },
     samaraStart() {
       this.CHANGE_BY_PATH(['samara.start', true])
       this.CHANGE_BY_PATH(['samara.counter', 0])

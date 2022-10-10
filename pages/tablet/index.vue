@@ -4,6 +4,7 @@
       <div class="field-container">
     <input class="field-input" id="inputid" name="inputName" v-model.lazy="pass" type="text" placeholder=" ">
     <label class="field-placeholder" for="inputName">Пароль</label>
+    <!-- тоже на скорую руку, потом может допилю получше, но я правильно поянл тему с плашкой? -->
     <ModuleBtnCollection
         :btnImg="img"
         :btnArray="[{name:'Проверить'}]"
@@ -48,7 +49,7 @@ export default {
     return {
       img: 'btnwitharrow',
       array: [],
-      style: 'odd',
+      style: 'oddBtns',
       title: '',
       myBtn: '',
       pass: undefined,
@@ -81,12 +82,18 @@ export default {
         console.log(btn.link)
         this.array = this.tablet[btn.link]
         this.title = btn.name.replaceAll(' <br>', '')
-        this.style = this.tablet[btn.link].length % 2 ? 'odd' : 'even'
+        this.style = this.tablet[btn.link].length % 2 ? 'oddBtns' : 'evenBtns'
         this.myBtn = btn.link
       } else {
         switch (this.myBtn) {
           case 'samaraButtons':
-            this.CHANGE_SAMARA_VIDEO(btn.link)
+            if(btn.link === 'start') {
+              this.CHANGE_BY_PATH(['samara.start', true])
+              this.CHANGE_BY_PATH(['samara.counter', 0])
+            } else {    
+              this.CHANGE_BY_PATH(['samara.start', false])          
+              this.CHANGE_SAMARA_VIDEO(btn.link)
+            }
             break
           case 'changeYear':
             this.CHANGE_TIMELINE_VIDEO(btn.link)

@@ -5,34 +5,55 @@
         <label for="div">Список ветеранов </label>
         <div class="filter">
           <input
-            @click="visibleKeyboard = true; modal = false"
+            @click="
+              visibleKeyboard = true
+              modal = false
+            "
             v-model="searchName"
             type="text"
             placeholder="Поиск по имени"
           />
         </div>
       </div>
-      <div class="all-size flex-center" style="align-items: center;" v-show="modal && !visibleKeyboard">
-        <img style="width: 70%; height:50%;" :src="require('~/assets/picture/veteran/modal/'+ modalIndex +'.png')" alt="">
+      <div
+        class="all-size flex-center"
+        style="align-items: center"
+        v-show="modal && !visibleKeyboard"
+      >
+        <img
+          style="width: 70%; height: 50%"
+          :src="
+            require('~/assets/picture/veteran/modal/' + modalIndex + '.png')
+          "
+          alt=""
+        />
+        <!-- Знаю бред, потом сверстаю нормальную модалку, пока так  -->
       </div>
-      <div v-show="!modal" :style="'z-index: ' + (visibleKeyboard?3:6)" class="v-container">
+      <div
+        v-show="!modal"
+        :style="'z-index: ' + (visibleKeyboard ? 3 : 6)"
+        class="v-container"
+      >
         <div
           class="v"
           style="width: 32vw"
           v-for="(user, index) in filteredVeterans"
           :key="index"
         >
-        <div @click="modal = true; modalIndex = index" :style="'justify-content: center; display: flex; align-items: flex-end; width: 300px; height: 200px; background-size: 100% 100%; background-image: url('+ user.img + ')'">
-          <!-- <img style="width: 300px"  alt="" /> -->
-          
-          <h3 style="background-image: linear-gradient(180deg, #00000000, #000000ff); color: white; text-align: center; margin: 0; font-size: 100%; " >
-          {{ user.name }}
-        </h3>
-            <!-- <p>{{ user.desc }}</p> -->
+          <div
+            class="modal"
+            @click="
+              modal = true
+              modalIndex = index
+            "
+            :style="'background-image: url(' + user.img + ')'"
+          >
+            <h3 class="text">
+              {{ user.name }}
+            </h3>
           </div>
         </div>
       </div>
-      <!-- 1234567890{delete:backspace}|qwertyuiop|asdfghjkl|{shift:goto:1}zxcvbnm|{space:space}{custom:custom} -->
     </div>
     <div class="ui-keyboard-case">
       <keyboard
@@ -72,8 +93,11 @@ export default {
   methods: {
     custom() {
       this.visibleKeyboard = false
-      if((this.filteredVeterans.length === 1) && (this.visibleKeyboard === false)) {
-        this.modal = true;
+      if (
+        this.filteredVeterans.length === 1 &&
+        this.visibleKeyboard === false
+      ) {
+        this.modal = true
         // this.modalIndex = this.filteredVeterans[0]
         this.modalIndex = 0
       }
@@ -114,6 +138,21 @@ export default {
   display: flex;
   margin: 50px;
   z-index: 3;
+}
+.v-container > .v > .modal > h3.text {
+  background-image: linear-gradient(180deg, #00000000, #000000ff);
+  color: white;
+  text-align: center;
+  margin: 0;
+  font-size: 100%;
+}
+.v-container > .v > .modal {
+  justify-content: center;
+  display: flex;
+  align-items: flex-end;
+  width: 300px;
+  height: 200px;
+  background-size: 100% 100%;
 }
 .v-container > .v {
   cursor: pointer;

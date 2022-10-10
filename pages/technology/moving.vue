@@ -7,7 +7,7 @@
       <NuxtLink to="/technology">эту ссылку</NuxtLink> и переключите
     </div>
     Сейчас выбран период {{ technology.period }} fixedVideo - {{ fixedVideo }}
-    <div v-for="(video, index) in technology.fixed" :key="index">
+    <div v-for="(video, index) in videoTechnology.fixed" :key="index">
       <ModuleVideo
         v-if="index === fixedVideo"
         class="all-size"
@@ -92,7 +92,10 @@ export default {
         ? false
         : 'ОШИБКА'
     },
-    ...mapGetters(['byPath']),
+    ...mapGetters({byPath: 'byPath', videoByPath: 'video/byPath'}),
+    videoTechnology() {
+      return this.videoByPath('technology')
+    },
     technology() {
       return this.byPath('technology')
     },

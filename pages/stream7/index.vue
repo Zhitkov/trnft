@@ -1,6 +1,7 @@
 <template>
   <div class="streams-container all-screen">
-    <div style="z-index: 99">
+    <div style="z-index: 99"> 
+      <!-- это на скорую руку чтоб работу линий проверить -->
       <div v-for="item in 7" :key="item">
         <img
           @click="streams(item)"

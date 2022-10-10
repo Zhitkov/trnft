@@ -47,9 +47,12 @@ import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   computed: {
-    ...mapGetters({ byPath: 'byPath', videoSamara: 'video/samara' }),
+    ...mapGetters({ byPath: 'byPath', videoByPath: 'video/byPath' }),
     samara() {
       return this.byPath('samara')
+    },
+    videoSamara() {
+      return this.videoByPath('samara')
     },
   },
   methods: {
