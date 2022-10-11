@@ -33,7 +33,7 @@ export default {
   },
   watch: {
     modelValue(mv) {
-      this.CHANGE_BY_PATH('smallTablet.modelValue', mv)
+      this.CHANGE_BY_PATH(['smallTablet.modelValue', mv])
     },
   },
   computed: {
