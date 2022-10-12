@@ -23,7 +23,7 @@ export default {
     var a = []
     for (const year of ['1936', '1953']) {
       const video = await $axios
-        .$get(api + '/api/timeline/'+year+'/2/')
+        .$get(api + '/api/timeline/' + year + '/2/')
         .then((response) => {
           console.log(response, 'response.data')
           return api + response.current_video
@@ -45,8 +45,16 @@ export default {
       return this.byPath('timeline')
     },
   },
+  mounted() {
+    this.refreshData()
+  },
   methods: {
     ...mapMutations(['CHANGE_TIMELINE_VIDEO']),
+    refreshData: function () {
+      setInterval(async function () {
+        await this.$nuxt.refresh()
+      }, 5000)
+    },
 
     // ...mapActions({
     //   getTimelineVideo: 'video/getTimelineVideo'
