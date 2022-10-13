@@ -1,6 +1,9 @@
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
+  env: {
+    BASE_URL: 'http://localhost:8000'
+  },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -45,19 +48,37 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    // '@nuxtjs/proxy',
+    '@nuxtjs/proxy',
     
   ],
-  // proxy: {
-  //   "/api": "https://127.0.0.1:8000"
-  // },
+  proxy: {
+    '/api': {
+      target: 'http://localhost:8000',
+      changeOrigin: true,
+      pathRewrite: { '^/api': '/' },
+    },
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     proxy: true,
+    proxyHeaders: true,
+    credentials: true,
+    baseURL: 'http://localhost:8000', //
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: '/',
   },
+  publicRuntimeConfig: {
+    axios: {
+      browserBaseURL: process.env.BROWSER_BASE_URL
+    }
+  },
+  privateRuntimeConfig: {
+    axios: {
+      baseURL: process.env.BASE_URL
+    }
+  },
+
+
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},

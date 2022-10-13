@@ -85,7 +85,6 @@ export const state = () => ({
     modelValue: 1,
   },
   timeline: {
-    counter: 0,
     pause: false,
   },
 })
@@ -116,15 +115,16 @@ export const mutations = {
       state.samara.counter = counter
     }
   },
-  CHANGE_TIMELINE_VIDEO(state, counter) {
-    if (!state.timeline.pause) {
-      state.timeline.pause = false
-    }
-    if (state.timeline.counter === 9) {
-      state.timeline.counter = 0
-    } else {
-      state.timeline.counter = counter
-    }
-  },
+  // CHANGE_TIMELINE_VIDEO(state, counter) {
+  //   if (!state.timeline.pause) {
+  //     state.timeline.pause = false
+  //   }
+  //   if (state.timeline.counter === 7) {
+  //     state.timeline.counter = 0
+
+  //   } else {
+  //     state.timeline.counter = counter
+  //   }
+  // },
   
 }

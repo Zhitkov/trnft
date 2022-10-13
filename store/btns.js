@@ -100,45 +100,29 @@ export const state = () => ({
     ],
     changeYear: [
         {
-          link: 0,
           name: '1936',
         },
         {
-          link: 1,
           name: '1953',
         },
         {
-          link: 2,
           name: '1961',
         },
         {
-          link: 3,
           name: '1970',
         },
         {
-          link: 4,
-          name: '1974',
+          name: '1980s',
         },
         {
-          link: 5,
-          name: '1979',
+          name: '1990s',
         },
         {
-          link: 6,
-          name: '1980-е',
+          name: '2000s',
         },
         {
-          link: 7,
-          name: '1990-е',
-        },
-        {
-          link: 8,
-          name: '2000-е',
-        },
-        {
-          link: 9,
-          name: '2010-e',
-        },
+          name: '2010s',
+        }
       ],
     timeline: [
         {
@@ -269,14 +253,13 @@ export const state = () => ({
 })
 
 export const getters = {
-  tablet(state) {
-    return state.tablet
-  },
-  smallTablet(state) {
-    return state.smallTablet
-  },
-  humanCapital(state) {
-    return state.humanCapital
+  byPath: (state) => (some) => {
+    console.log('from getter', some);
+    return some.
+      replace(/\[/g, '.').
+      replace(/\]/g, '').
+      split('.').
+      reduce((o, k) => (o || {})[k], state);
   },
 }
 

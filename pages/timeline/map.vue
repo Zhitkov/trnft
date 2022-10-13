@@ -1,11 +1,12 @@
 <template>
   <div>
-    <div v-for="(video, index) in videoTimeline" :key="index">
-      {{ video.year }}
-      {{ newVideos[index] || videoTimeline[index].video2 }}
+    chosenYear = {{chosenYear}}
+    <div v-for="(video, index) in allYears" :key="index">
+      {{ video.name }}
+      {{ newVideos[index] }}
       <ModuleVideo
-        v-if="index === timeline.counter"
-        :videoSrc="newVideos[index] || videoTimeline[index].video1"
+        v-if="video.name === chosenYear"
+        :videoSrc="newVideos[index]"
         :loop="false"
         @ended="changeTimeline()"
         :pause="timeline.pause"
@@ -19,31 +20,37 @@ import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   async asyncData({ $axios }) {
-    const api = 'http://localhost:8000'
-    var a = []
-    for (const year of ['1936', '1953']) {
-      const video = await $axios
-        .$get(api + '/api/timeline/' + year + '/1/')
+    const chosenYear = await $axios.$get('/api/api/timeline/year/')
+    // const chosenYear = await $axios.$get(api + '/api/timeline/year/')
         .then((response) => {
           console.log(response, 'response.data')
-          return api + response.current_video
+          return response.year
+        });
+    var a = []
+    for (const year of ['1936', '1953', '1961', '1970', '1980s', '1990s', '2000s', '2010s']) {
+      const video = await $axios
+        .$get('/api/api/timeline/' + year + '/1/')
+        .then((response) => {
+          console.log(response, 'response.data')
+          return process.env.BASE_URL + response.current_video
         })
       a.push(video)
     }
-    return { newVideos: a }
+    
+    return { newVideos: a, chosenYear: chosenYear }
   },
   // data() {
   //   return {
-  //     asd: true,
+  //     counter: 0,
   //   }
   // },
   computed: {
-    ...mapGetters({ videoByPath: 'video/byPath', byPath: 'byPath' }),
+    ...mapGetters({ videoByPath: 'btns/byPath', byPath: 'byPath' }),
     timeline() {
       return this.byPath('timeline')
     },
-    videoTimeline() {
-      return this.videoByPath('timeline.video')
+    allYears() {
+      return this.videoByPath('tablet.changeYear')
     },
   },
   mounted() {
@@ -51,9 +58,33 @@ export default {
   },
   methods: {
     ...mapMutations(['CHANGE_TIMELINE_VIDEO']),
-    changeTimeline() {
-      this.CHANGE_TIMELINE_VIDEO(this.timeline.counter + 1)
-    },
+    async changeTimeline() {
+      let counter = this.allYears.findIndex(x => x.name === this.chosenYear) + 1;
+      let newYear = this.allYears[counter].name;
+      if (!this.timeline.pause) {
+        this.timeline.pause = false
+    }
+    if (counter >= 7) {
+      await this.$axios
+              .$post('http://localhost:8000/api/timeline/year/', {year: newYear})
+              .then(function (response) {
+                console.log(response)
+              })
+              .catch(function (error) {
+                console.log(error)
+              })
+
+    } else {
+      await this.$axios
+              .$post('http://localhost:8000/api/timeline/year/', {year: newYear})
+              .then(function (response) {
+                console.log(response)
+              })
+              .catch(function (error) {
+                console.log(error)
+              })
+    }
+  },
     refreshData: function () {
       setInterval(async function () {
         await this.$nuxt.refresh()

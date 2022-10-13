@@ -1,22 +1,36 @@
 <template>
   <div class="">
-    <div v-show="pass !==truePass" style="align-items: center;" class="flex-center all-screen corner-decoration">
+    <div
+      v-show="pass !== truePass"
+      style="align-items: center"
+      class="flex-center all-screen corner-decoration"
+    >
       <div class="field-container">
-    <input class="field-input" id="inputid" name="inputName" v-model.lazy="pass" type="text" placeholder=" ">
-    <label class="field-placeholder" for="inputName">Пароль</label>
-    <!-- тоже на скорую руку, потом может допилю получше, но я правильно поянл тему с плашкой? -->
-    <ModuleBtnCollection
-        :btnImg="img"
-        :btnArray="[{name:'Проверить'}]"
-        :btnStyle="style"
-        :noLogo='true'
-        style="margin-top: 60px;"
-        class="all-size flex-center human_capital-btns"
-      ></ModuleBtnCollection>
-    <h1 v-show="pass !== undefined" style="color: red">Не правильно</h1>
-  </div>
+        <input
+          class="field-input"
+          id="inputid"
+          name="inputName"
+          v-model.lazy="pass"
+          type="text"
+          placeholder=" "
+        />
+        <label class="field-placeholder" for="inputName">Пароль</label>
+        <!-- тоже на скорую руку, потом может допилю получше, но я правильно поянл тему с плашкой? -->
+        <ModuleBtnCollection
+          :btnImg="img"
+          :btnArray="[{ name: 'Проверить' }]"
+          :btnStyle="style"
+          :noLogo="true"
+          style="margin-top: 60px"
+          class="all-size flex-center human_capital-btns"
+        ></ModuleBtnCollection>
+        <h1 v-show="pass !== undefined" style="color: red">Не правильно</h1>
+      </div>
     </div>
-    <div v-show="pass ===truePass" class="flex-center all-screen corner-decoration">
+    <div
+      v-show="pass === truePass"
+      class="flex-center all-screen corner-decoration"
+    >
       <!-- {{ btnKeys }} -->
       <br />
       <!-- {{ title }} -->
@@ -29,7 +43,7 @@
         alt=""
       />
       <ModuleBtnCollection
-        :noLogo='false'
+        :noLogo="false"
         :btnImg="img"
         :btnArray="btnArray"
         :btnStyle="style"
@@ -53,7 +67,7 @@ export default {
       title: '',
       myBtn: '',
       pass: undefined,
-      truePass: 'asd'
+      truePass: 'asd',
     }
   },
   computed: {
@@ -68,16 +82,25 @@ export default {
       }
     },
     ...mapGetters({
-      tablet: 'btns/tablet',
+      byPath: 'btns/byPath',
     }),
+    tablet() {
+      return this.byPath('tablet')
+    },
   },
   methods: {
-    ...mapMutations(['CHANGE_SAMARA_VIDEO','CHANGE_TIMELINE_VIDEO', 'CHANGE_BY_PATH']),
+    ...mapMutations([
+      'CHANGE_SAMARA_VIDEO',
+      'CHANGE_TIMELINE_VIDEO',
+      'CHANGE_BY_PATH',
+    ]),
     returnToMain() {
       this.array = this.tablet.main
       this.title = ''
     },
-    changeBtns(btn) {
+    async changeBtns(btn) {
+      const api = 'http://localhost:8000'
+
       if (this.tablet[btn.link]) {
         console.log(btn.link)
         this.array = this.tablet[btn.link]
@@ -87,19 +110,29 @@ export default {
       } else {
         switch (this.myBtn) {
           case 'samaraButtons':
-            if(btn.link === 'start') {
+            if (btn.link === 'start') {
               this.CHANGE_BY_PATH(['samara.start', true])
               this.CHANGE_BY_PATH(['samara.counter', 0])
-            } else {    
-              this.CHANGE_BY_PATH(['samara.start', false])          
+            } else {
+              this.CHANGE_BY_PATH(['samara.start', false])
               this.CHANGE_SAMARA_VIDEO(btn.link)
             }
             break
           case 'changeYear':
-            this.CHANGE_TIMELINE_VIDEO(btn.link)
+            // let data = JSON.stringify({year: btn.name})
+            console.log({year: btn.name})
+            await this.$axios
+              .$post('http://localhost:8000/api/timeline/year/', {year: btn.name})
+              .then(function (response) {
+                console.log(response)
+              })
+              .catch(function (error) {
+                console.log(error)
+              })
+            // this.CHANGE_TIMELINE_VIDEO(btn.link)
             break
           case 'changeScreenPosition':
-            this.CHANGE_BY_PATH(technology.period, btn.link)
+            this.CHANGE_BY_PATH(['technology.period', btn.link])
             break
 
           default:
@@ -124,7 +157,6 @@ export default {
   width: 2vw;
 }
 
-
 .field-container {
   position: relative;
   border: 1px solid #bcbaba;
@@ -143,37 +175,40 @@ export default {
   transform: translate('5px-50%');
 }
 
- input[type="text"].field-input {
-	 color: #000;
-	 border: none;
-	 padding: 5px;
-	 margin-top: 20px;
-	 font-size: 16px;
-	 display: block;
-	 box-sizing: border-box;
-	 width: 100%;
-	 bottom: 0px;
+input[type='text'].field-input {
+  color: #000;
+  border: none;
+  padding: 5px;
+  margin-top: 20px;
+  font-size: 16px;
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  bottom: 0px;
 }
- input[type="text"].field-input:focus {
-	 outline: none;
+input[type='text'].field-input:focus {
+  outline: none;
 }
- input[type="text"].field-input.c-fix, input[type="text"].field-input:focus, input[type="text"].field-input:not(:placeholder-shown) {
-	 border-color: transparent;
+input[type='text'].field-input.c-fix,
+input[type='text'].field-input:focus,
+input[type='text'].field-input:not(:placeholder-shown) {
+  border-color: transparent;
 }
- input[type="text"].field-input.c-fix ~ label, input[type="text"].field-input:focus ~ label, input[type="text"].field-input:not(:placeholder-shown) ~ label {
-	 color: #646669;
-	 font-size: 11px;
-	 top: calc(30% - .5rem);
-	 transform: translate('5px0%');
+input[type='text'].field-input.c-fix ~ label,
+input[type='text'].field-input:focus ~ label,
+input[type='text'].field-input:not(:placeholder-shown) ~ label {
+  color: #646669;
+  font-size: 11px;
+  top: calc(30% - 0.5rem);
+  transform: translate('5px0%');
 }
- input[type="text"].field-input::-webkit-input-placeholder {
-	 color: transparent;
+input[type='text'].field-input::-webkit-input-placeholder {
+  color: transparent;
 }
- input[type="text"].field-input::-moz-placeholder {
-	 color: transparent;
+input[type='text'].field-input::-moz-placeholder {
+  color: transparent;
 }
- input[type="text"].field-input:-ms-input-placeholder {
-	 color: transparent;
+input[type='text'].field-input:-ms-input-placeholder {
+  color: transparent;
 }
- 
 </style>

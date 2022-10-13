@@ -53,9 +53,9 @@ export default {
   font-size: 36pt;
 }
 .btnsStyle {
-  width: 25vw;
+  width: 20vw;
 
-  height: 20vh;
+  height: 13vh;
   display: flex;
   justify-content: center;
   align-items: center;
