@@ -16,27 +16,65 @@
         </div>
       </div>
       <div
-        class="all-size flex-center"
+        class="all-size flex-center chosen-veteran-container"
         style="align-items: center"
         v-show="modal && !visibleKeyboard"
+        :style="'z-index: ' + (!modal&&visibleKeyboard ? 3 : 6)"
       >
-        <img
-          style="width: 70%; height: 50%"
-          :src="
-            require('~/assets/picture/veteran/modal/' + modalIndex + '.png')
-          "
-          alt=""
-        />
+        <div class="chosen-veteran">
+          <div class="chosen-veteran-img">
+            <img :src="modalInfo.img" alt="">
+          </div>
+          <div class="chosen-veteran-desc">
+            <h2>{{modalInfo.name}}</h2>
+            <p>{{modalInfo.desc}}</p>
+            <div style="width: 100%;text-align: center;">
+              <div @click="modal = false">
+                <div class="btnwitharrow" style="background-size: contain; background-repeat: no-repeat; background-position: center center;">Назад</div>
+              </div>
+            </div>
+          </div>
+        </div>
         <!-- Знаю бред, потом сверстаю нормальную модалку, пока так  -->
       </div>
       <div
         v-show="!modal"
         :style="'z-index: ' + (visibleKeyboard ? 3 : 6)"
-        class="v-container"
+        
       >
+        <div class="v-container v-grid" :style="'z-index: ' + (visibleKeyboard ? 3 : 6)" v-show="filteredVeterans.length === 0">
+          <div
+            style="color: white"
+            v-for="letterArr in arraysByAlphabet"
+            :key="letterArr.title"
+          >
+            <label style="text-align: center;" for="div.itemLetter"><h4 style=" background-color: #ffffff0f;">{{ letterArr.title }}</h4></label>
+            <div
+              style="display: flex"
+              class="itemLetter"
+              v-for="letterItem in letterArr.data"
+              :key="letterItem.name"
+            >
+              <!-- {{letterItem}} -->
+              <img style="width: 100px" :src="letterItem.img" alt="" />
+              <div
+                class="modal"
+                @click="
+                  modal = true
+                  modalInfo = {name: letterItem.name, img: letterItem.img, desc: letterItem.desc}
+                "
+              >
+                <h4 class="text">
+                  {{ letterItem.name }}
+                </h4>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="v-container" style="gap: 30px;">
         <div
           class="v"
-          style="width: 32vw"
+          style="width: auto"
           v-for="(user, index) in filteredVeterans"
           :key="index"
         >
@@ -44,7 +82,7 @@
             class="modal"
             @click="
               modal = true
-              modalIndex = index
+              modalInfo = {name: user.name, img: user.img, desc: user.desc}
             "
             :style="'background-image: url(' + user.img + ')'"
           >
@@ -53,6 +91,7 @@
             </h3>
           </div>
         </div>
+      </div>
       </div>
     </div>
     <div class="ui-keyboard-case">
@@ -81,7 +120,7 @@ export default {
       layout: 'normal',
       visibleKeyboard: false,
       modal: false,
-      modalIndex: 0,
+      modalInfo: {},
       options: {
         useKbEvents: false,
         preventClickEvent: false,
@@ -108,6 +147,27 @@ export default {
     veterans() {
       return this.byPath('humanCapital.veterans')
     },
+    arraysByAlphabet() {
+      return Object.values(
+        this.veterans.reduce((acc, word) => {
+          let firstLetter = word.name[0].toLocaleUpperCase()
+          if (!acc[firstLetter]) {
+            acc[firstLetter] = { title: firstLetter, data: [word] }
+          } else {
+            acc[firstLetter].data.push(word)
+          }
+          acc = Object.keys(acc)
+            .sort()
+            .reduce(function (result, key) {
+              result[key] = acc[key]
+              return result
+            }, {})
+          // acc = Object.values(acc)
+          console.log(acc)
+          return acc
+        }, {})
+      )
+    },
     filteredVeterans() {
       var users_array = this.veterans,
         searchName = this.searchName
@@ -133,11 +193,19 @@ export default {
   background-size: 100vw 100vh;
   display: flex;
 }
+.v-grid {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-gap: 30px;
+}
 .v-container {
   position: absolute;
   display: flex;
   margin: 50px;
   z-index: 3;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+
 }
 .v-container > .v > .modal > h3.text {
   background-image: linear-gradient(180deg, #00000000, #000000ff);
@@ -200,4 +268,40 @@ button.action:nth-child(2) {
   background-color: red;
   color: black;
 }
+
+.chosen-veteran {
+  display: flex;
+  flex-direction: row;
+  height: 59%;
+  width: 80vw;
+  background-image: url('~/assets/creative/chosenVeteranBg.svg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+.chosen-veteran > .chosen-veteran-img {
+  height: 100%;
+  width:auto;
+}
+.chosen-veteran > .chosen-veteran-img > img {
+  height: 100%;
+  width:auto;
+}
+.chosen-veteran > .chosen-veteran-desc {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px 0px 30px 10px;
+}
+.chosen-veteran > .chosen-veteran-desc > h2 {
+  text-align: center;
+  width: 100%;
+}
+.chosen-veteran > .chosen-veteran-desc > p {
+  text-align: left;
+  width: 90%;
+  margin: 0;
+}
+
 </style>
+

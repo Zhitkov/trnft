@@ -38,6 +38,7 @@ export default {
   flex-wrap: wrap;
 }
 .big-logo {
+  margin-bottom: 8vh;
   width: 60vw;
   height: 25vh;
 }
@@ -53,14 +54,14 @@ export default {
   font-size: 36pt;
 }
 .btnsStyle {
-  width: 20vw;
-
+  width: 27vw;
+  color: #025692;
   height: 13vh;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  margin: 5vh 0;
+  margin: 6vh 1vw;
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }
@@ -74,7 +75,7 @@ export default {
   background-image: url('~/assets/creative/rbsmbtn.svg');
 }
 .oddBtns {
-  justify-content: space-around;
+  justify-content: center;
 }
 .evenBtns {
   justify-content: space-around;

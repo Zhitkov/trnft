@@ -43,8 +43,11 @@ export default {
     //     }
     //   },
     ...mapGetters({
-      smallTablet: 'btns/smallTablet',
+      getByPath: 'btns/byPath',
     }),
+    smallTablet() {
+      return this.getByPath('smallTablet')
+    },
   },
   methods: {
     ...mapMutations(['CHANGE_BY_PATH']),

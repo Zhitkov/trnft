@@ -38,6 +38,10 @@ export default {
     loop: Boolean,
     pause: Boolean
   },
+  mounted() {
+    this.$refs.videoPlay
+    console.log(this.$refs.videoPlay.$el, 'this.$refs'); 
+  },
   watch: {
     'pause': function () {
       this.$nextTick(function () {

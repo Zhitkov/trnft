@@ -42,8 +42,11 @@ export default {
       }
     },
     ...mapGetters({
-      humanCapital : 'btns/humanCapital'
+      byPath : 'btns/byPath'
     }),
+    humanCapital() {
+      return this.byPath('humanCapital')
+    }
   },
   methods: {
     returnToMain() {

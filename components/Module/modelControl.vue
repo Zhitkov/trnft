@@ -1,8 +1,7 @@
 <template>
-  <div class="all-size">
-    <div>
-      <label for="vue-range-slider">x</label>
-      <br />
+  <div class="all-size flex-center" style="align-items: center">
+    <div class="sliderus">
+      <!-- <label for="vue-range-slider">x</label> -->
       <vue-range-slider
         :name="'x'"
         :step="1"
@@ -45,4 +44,14 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.vue-range-slider.slider-component .slider .slider-dot.slider-always .slider-tooltip-wrap {
+  display: none !important;
+}
+.sliderus {
+  width: 80vw;
+}
+.vue-range-slider.slider-component .slider .slider-process {
+  background-color: #e12123 !important;
+}
+</style>

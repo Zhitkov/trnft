@@ -47,4 +47,12 @@ div.mx-video-player__mask-progress.mx-video-player__mask-progress_show {
   background-position: left top, right bottom, center;
   background-repeat: no-repeat, no-repeat;
 }
+
+@font-face {
+    font-family: "Open Sans";
+    src: local("Open Sans"),     url(~/assets/fonts/open-sans.ttf) format("truetype");}
+
+html {
+    font-family: "Open Sans";
+}
 </style>

@@ -71,9 +71,9 @@ export default {
     }
   },
   computed: {
-    btnKeys() {
-      return Object.keys(this.tablet)
-    },
+    // btnKeys() {
+    //   return Object.keys(this.tablet)
+    // },
     btnArray() {
       if (this.array.length === 0) {
         return this.tablet.main
@@ -82,10 +82,10 @@ export default {
       }
     },
     ...mapGetters({
-      byPath: 'btns/byPath',
+      getByPath: 'btns/byPath',
     }),
     tablet() {
-      return this.byPath('tablet')
+      return this.getByPath('tablet')
     },
   },
   methods: {
@@ -99,7 +99,6 @@ export default {
       this.title = ''
     },
     async changeBtns(btn) {
-      const api = 'http://localhost:8000'
 
       if (this.tablet[btn.link]) {
         console.log(btn.link)
