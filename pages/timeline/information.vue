@@ -53,9 +53,9 @@ export default {
       return this.videoByPath('tablet.changeYear')
     },
   },
-  mounted() {
-    this.refreshData()
-  },
+  // mounted() {
+  //   this.refreshData()
+  // },
   methods: {
     async changeTimeline() {
       let counter = this.allYears.findIndex(x => x.name === this.chosenYear) + 1;
@@ -84,11 +84,11 @@ export default {
               })
     }
   },
-    refreshData: function () {
-      setInterval(async function () {
-        await this.$nuxt.refresh()
-      }, 5000)
-    },
+    // refreshData: function () {
+    //   setInterval(async function () {
+    //     await this.$nuxt.refresh()
+    //   }, 5000)
+    // },
   },
 }
 </script>

@@ -1,15 +1,14 @@
 <template>
   <div class="all-screen">
     <div class="">
-      Это неподвижный большой экран стенда техноглогии. Здесь играет ролик,
-      выбранный с помощью кнопок планшета. Если хотите переключить ролик,
-      откройте в другой вкладке
+      Это двигается 
       <NuxtLink to="/technology">эту ссылку</NuxtLink> и переключите
     </div>
-    Сейчас выбран период {{ technology.period }} fixedVideo - {{ fixedVideo }}
-    <div v-for="(video, index) in videoTechnology.fixed" :key="index">
+    Сейчас выбран период {{ stage }} fixedVideo - {{ fixedVideo }}
+    <div v-for="(video, index) in movingVideos" :key="index">
+      {{fixedVideo}} === {{fixedVideo}}
       <ModuleVideo
-        v-if="index === fixedVideo"
+        v-if="fixedVideo === index"
         class="all-size"
         :videoSrc="video"
         :loop="true"
@@ -17,7 +16,7 @@
     </div>
     <div
       class="all-screen future-moving-screen"
-      v-show="technology.period === 'future'"
+      v-show="stage === 'future'"
     >
       <div v-show="futureMoving" class="logo-place">
         <img src="~/assets/picture/logo.png" alt="" />
@@ -57,7 +56,30 @@ import VueProduct360 from '@deviznet/vue-product-360'
 
 import { mapGetters } from 'vuex'
 
+
 export default {
+  async asyncData({ $axios }) {
+    const stage = await $axios
+        .$get('/api/api/technologies/stage/')
+        .then((response) => {
+          console.log(response, 'response.data')
+          return response.stage
+        })    
+    var a = []
+    for (const period of ['past', 'present', 'present2']) {
+      const video = await $axios
+        .$get('api/api/technologies/moving/'+ period +'/' )
+        .then((response) => {
+          console.log(response, 'response.data')
+          return process.env.BASE_URL + response.current_video
+        })
+
+      a.push(video)
+    }
+    a.forEach((e) => {e = 'http://localhost:8000/media/' + e})
+    
+    return { movingVideos: a, stage: stage }
+  },
   data() {
     return {
       futureMoving: false,
@@ -92,15 +114,13 @@ export default {
   // },
   computed: {
     fixedVideo: function () {
-      return this.technology.period === 'past'
+      return this.stage === 'past'
         ? 0
-        : this.technology.period === 'present'
+        : this.stage === 'present'
         ? 1
-        : this.technology.period === 'present2'
+        : this.stage === 'present2'
         ? 2
-        : this.technology.period === 'future'
-        ? false
-        : 'ОШИБКА'
+        : false
     },
     ...mapGetters({ byPath: 'byPath', videoByPath: 'video/byPath' }),
     videoTechnology() {

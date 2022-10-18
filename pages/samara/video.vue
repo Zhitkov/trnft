@@ -2,13 +2,14 @@
   <div class="all-screen">
     <!-- style="display: none" -->
     {{ samara.start }}
-    <div v-for="(video, index) in samara.video" :key="index">
+    {{samaraVideos}}
+    <div v-for="(video, index) in samaraVideos" :key="index+'1'">
       <v-idle
         @idle="CHANGE_BY_PATH(['samara.idle', true])"
         :loop="false"
-        :duration="video.endTime + 3"
+        :duration="parseFloat(video.video_duration) + 3"
         :events="['']"
-        v-if="!samara.idle && index === samara.counter"
+        v-if="!samara.idle && index === stage"
       />
     </div>
     <div class="">
@@ -17,17 +18,17 @@
       вкладке <NuxtLink to="/entry_group/left">эту ссылку</NuxtLink> и
       переключите
     </div>
-    Сейчас Выбран {{ samara.counter }}
+    Сейчас Выбран {{ stage }}
     <!-- <div class="" v-show="!samara.idle"> -->
     <div
       v-show="!samara.idle"
-      v-for="(video, index) in videoSamara.video"
+      v-for="(video, index) in samaraVideos"
       :key="index"
     >
-      <ModuleVideo
-        v-if="index === samara.counter"
+    <ModuleVideo
+        v-if="index === stage-1"
         class="all-size"
-        :videoSrc="video.src"
+        :videoSrc="video.current_video"
         :loop="false"
         @ended="changeSamara()"
       ></ModuleVideo>
@@ -46,6 +47,47 @@
 import { mapGetters, mapMutations } from 'vuex'
 
 export default {
+  async asyncData({ $axios }) {
+    const stage = await $axios
+        .$get('/api/api/area_samara/stage/')
+        .then((response) => {
+          console.log(response, 'response.data')
+          return response.stage
+        })
+    var a = []
+    for (let count = 1; count <= 4; count++) {
+      const video = await $axios
+        .$get('/api/api/area_samara/' + count + '/video/')
+        .then((response) => {
+          console.log(response, 'response.data')
+          return response
+        })
+      a.push(video)
+    }
+    a.forEach((e) => {e.current_video = 'http://localhost:8000' + e.current_video})
+    
+    return { samaraVideos: a, stage: stage }
+  },
+  // samara: {
+  //   video: [
+  //     {
+  //       src: require('/static/video/samara/1.mp4'),
+  //       endTime: 20,
+  //     },
+  //     {
+  //       src: require('/static/video/samara/2.mp4'),
+  //       endTime: 15,
+  //     },
+  //     {
+  //       src: require('/static/video/samara/3.mp4'),
+  //       endTime: 23,
+  //     },
+  //     {
+  //       src: require('/static/video/samara/3.mp4'),
+  //       endTime: 23,
+  //     },
+  //   ]
+  // },
   computed: {
     ...mapGetters({ byPath: 'byPath', videoByPath: 'video/byPath' }),
     samara() {
@@ -57,12 +99,30 @@ export default {
   },
   methods: {
     ...mapMutations(['CHANGE_SAMARA_VIDEO','CHANGE_BY_PATH']),
-    changeSamara() {
+    async changeSamara() {
       if (this.samara.start) {
-        this.CHANGE_SAMARA_VIDEO(this.samara.counter + 1)
+        let newStage = parseInt(this.stage)+1;
+        console.log(newStage, 'newStage');
+        // this.CHANGE_SAMARA_VIDEO(this.samara.counter + 1)
+        await this.$axios
+        .$post('http://localhost:8000/api/area_samara/stage/', {stage: newStage,})
+        .then(function (response) {
+          console.log(response)
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
       }
     },
+    // refreshData: function () {
+    //   setInterval(async function () {
+    //     await this.$nuxt.refresh()
+    //   }, 5000)
+    // },
   },
+  // mounted() {
+  //   this.refreshData()
+  // },
 }
 </script>
 

@@ -46,19 +46,19 @@ export const state = () => ({
     ],
     samaraButtons: [
         {
-          link: 0,
+          link: 1,
           name: 'Этап 1',
         },
         {
-          link: 1,
+          link: 2,
           name: 'Этап 2',
         },
         {
-          link: 2,
+          link: 3,
           name: 'Этап 3',
         },
         {
-          link: 3,
+          link: 4,
           name: 'Этап 4',
         },
         {

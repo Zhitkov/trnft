@@ -3,7 +3,18 @@
 </template>
 
 <script>
-export default {}
+export default {
+  methods: {
+    refreshData: function () {
+        setInterval(async function () {
+          await this.$nuxt.refresh()
+        }, 5000)
+      },
+  },
+    mounted() {
+    this.refreshData()
+  },
+}
 </script>
 
 <style>

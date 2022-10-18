@@ -99,7 +99,6 @@ export default {
       this.title = ''
     },
     async changeBtns(btn) {
-
       if (this.tablet[btn.link]) {
         console.log(btn.link)
         this.array = this.tablet[btn.link]
@@ -111,17 +110,37 @@ export default {
           case 'samaraButtons':
             if (btn.link === 'start') {
               this.CHANGE_BY_PATH(['samara.start', true])
-              this.CHANGE_BY_PATH(['samara.counter', 0])
+              this.CHANGE_BY_PATH(['samara.counter', 1])
+              await this.$axios
+                .$post('http://localhost:8000/api/area_samara/stage/', {
+                  stage: 1,
+                })
+                .then(function (response) {
+                  console.log(response)
+                })
+                .catch(function (error) {
+                  console.log(error)
+                })
             } else {
-              this.CHANGE_BY_PATH(['samara.start', false])
-              this.CHANGE_SAMARA_VIDEO(btn.link)
+              await this.$axios
+                .$post('http://localhost:8000/api/area_samara/stage/', {
+                  stage: btn.link,
+                })
+                .then(function (response) {
+                  console.log(response)
+                })
+                .catch(function (error) {
+                  console.log(error)
+                })
             }
             break
           case 'changeYear':
             // let data = JSON.stringify({year: btn.name})
-            console.log({year: btn.name})
+            console.log({ year: btn.name })
             await this.$axios
-              .$post('http://localhost:8000/api/timeline/year/', {year: btn.name})
+              .$post('http://localhost:8000/api/timeline/year/', {
+                year: btn.name,
+              })
               .then(function (response) {
                 console.log(response)
               })
@@ -131,7 +150,17 @@ export default {
             // this.CHANGE_TIMELINE_VIDEO(btn.link)
             break
           case 'changeScreenPosition':
-            this.CHANGE_BY_PATH(['technology.period', btn.link])
+            console.log(btn.link, 'alskdfjlsdhfoisehfu');
+          await this.$axios
+            .$post('http://localhost:8000/api/technologies/stage/', {
+              stage: btn.link,
+            })
+            .then(function (response) {
+              console.log(response)
+            })
+            .catch(function (error) {
+              console.log(error)
+            })
             break
 
           default:

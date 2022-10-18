@@ -53,9 +53,9 @@ export default {
       return this.videoByPath('tablet.changeYear')
     },
   },
-  mounted() {
-    this.refreshData()
-  },
+  // mounted() {
+  //   this.refreshData()
+  // },
   methods: {
     ...mapMutations(['CHANGE_TIMELINE_VIDEO']),
     async changeTimeline() {
@@ -85,11 +85,11 @@ export default {
               })
     }
   },
-    refreshData: function () {
-      setInterval(async function () {
-        await this.$nuxt.refresh()
-      }, 5000)
-    },
+    // refreshData: function () {
+    //   setInterval(async function () {
+    //     await this.$nuxt.refresh()
+    //   }, 5000)
+    // },
   },
 }
 </script>

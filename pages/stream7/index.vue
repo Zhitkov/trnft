@@ -47,9 +47,9 @@ export default {
       streamArr: [],
     }
   },
-  mounted() {
-    this.refreshData()
-  },
+  // mounted() {
+  //   this.refreshData()
+  // },
   methods: {
     streams(item) {
       if (this.streamArr.indexOf(item) !== -1) {
@@ -60,11 +60,11 @@ export default {
         this.streamArr.push(item)
       }
     },
-    refreshData: function () {
-      setInterval(async function () {
-        await this.$nuxt.refresh()
-      }, 5000)
-    },
+    // refreshData: function () {
+    //   setInterval(async function () {
+    //     await this.$nuxt.refresh()
+    //   }, 5000)
+    // },
   },
 }
 </script>

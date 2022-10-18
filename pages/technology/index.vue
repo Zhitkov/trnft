@@ -5,11 +5,11 @@
     <NuxtLink to="/tablet">планшете</NuxtLink>
 
     <br>
-    Выбран период {{technology.period}}
+    Выбран период {{stage}}
     <br>
 
     <div v-for="(item, index) in ['past', 'present', 'present2', 'future']" :key="index">
-      <button @click="CHANGE_BY_PATH(['technology.period', item])">
+      <button @click="changeStage(item)">
         {{ item }}
       </button>
     </div>
@@ -27,6 +27,15 @@
 import { mapGetters, mapMutations } from 'vuex'
 
 export default {
+  async asyncData({ $axios }) {
+    const stage = await $axios
+        .$get('/api/api/technologies/stage/')
+        .then((response) => {
+          console.log(response, 'response.data')
+          return response.stage
+        })    
+    return { stage: stage }
+  },
   computed: {
     ...mapGetters(['byPath']),
     technology() {
@@ -34,7 +43,19 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['CHANGE_BY_PATH']),
+    async changeStage(stage) {
+      await this.$axios
+        .$post('http://localhost:8000/api/technologies/stage/', {
+          stage: stage,
+        })
+        .then(function (response) {
+          console.log(response)
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
+    }
+    // ...mapMutations(['CHANGE_BY_PATH']),
   },
 }
 </script>
