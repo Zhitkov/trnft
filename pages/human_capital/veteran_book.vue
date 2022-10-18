@@ -65,7 +65,7 @@
                 "
               >
                 <h4 class="text">
-                  {{ letterItem.name }}
+                  {{ letterItem.fio }}
                 </h4>
               </div>
             </div>
@@ -84,10 +84,10 @@
               modal = true
               modalInfo = {name: user.fio, img: user.photo, desc: user.description}
             "
-            :style="'background-image: url(' + user.img + ')'"
+            :style="'background-image: url(' + user.photo + ')'"
           >
             <h3 class="text">
-              {{ user.name }}
+              {{ user.fio }}
             </h3>
           </div>
         </div>
@@ -118,7 +118,7 @@ export default {
           console.log(response, 'response.data')
           return response.employees
         });
-    veterans.forEach((e) => {e.photo = 'http://localhost:8000/api/' + e.photo})
+    veterans.forEach((e) => {e.photo = 'http://localhost:8000/media/' + e.photo})
     
     return { veterans: veterans }
   },
