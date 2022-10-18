@@ -22,29 +22,38 @@
       <div v-show="futureMoving" class="logo-place">
         <img src="~/assets/picture/logo.png" alt="" />
       </div>
+
       <!-- <div v-for="item in 180" :key="item"> -->
       <!-- :style="'transform: scale(' + value2 + ');'" -->
       <!-- v-show="item === value" -->
-
-      <div v-for="(model, modelIndex) in technology.models" :key="modelIndex">
-        <div v-show="modelIndex === smallTablet.modelIndex">
-          <div v-for="(img, index) in model" :key="index">
-            <img v-show="index === smallTablet.modelValue" :src="img" alt="" />
+      <div v-show="modelIndex === null" class="">
+        <div v-for="item in 5" :key="item + '1'">
+          <img :src="'/assets/picture/carousel/' + item + '.pdf'" alt="" />
+        </div>
+      </div>
+      <div v-show="modelIndex !== null" class="">
+        <div v-for="index in 3" :key="index">
+          <div v-show="index === modelIndex">
+            <VueProduct360 :images="technology.models[index]">
+              <p>Грузиться</p>
+            </VueProduct360>
           </div>
         </div>
       </div>
-      <!-- </div> -->
 
       <div class="button-place">
-        <button @click="futureMoving = !futureMoving">ГЛАВНАЯ СТРАНИЦА</button>
+        <button @click="futureMoving = !futureMoving">
+          ГЛАВНАЯ СТРАНИЦА {{ modelIndex }}
+        </button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import 'vue-range-component/dist/vue-range-slider.css'
-import VueRangeSlider from 'vue-range-component'
+// import 'vue-range-component/dist/vue-range-slider.css'
+// import VueRangeSlider from 'vue-range-component'
+import VueProduct360 from '@deviznet/vue-product-360'
 
 import { mapGetters } from 'vuex'
 
@@ -54,10 +63,11 @@ export default {
       futureMoving: false,
       newCoords: {},
       value: 60,
+      slider: 0
     }
   },
   components: {
-    VueRangeSlider,
+    VueProduct360,
   },
   // mounted() {
   //   this.changePos = function (pos) {
@@ -66,16 +76,16 @@ export default {
   //   }
   // },
   // watch: {
-    // 'smallTablet.model': function () {
-    //   this.$nextTick(function () {
-    //     if (this.$refs[this.pageType][0].scrollTop !== this.scrollValue) {
-    //       this.$refs[this.pageType][0].scrollTop = this.scrollValue
-    //     }
-    //   })
-    // },
-    // value(mv) {
-    //   this.CHANGE_MODEL_VALUE(mv)
-    // },
+  // 'smallTablet.model': function () {
+  //   this.$nextTick(function () {
+  //     if (this.$refs[this.pageType][0].scrollTop !== this.scrollValue) {
+  //       this.$refs[this.pageType][0].scrollTop = this.scrollValue
+  //     }
+  //   })
+  // },
+  // value(mv) {
+  //   this.CHANGE_MODEL_VALUE(mv)
+  // },
   // },
   // components: {
   //   ThreejsComponent: process.browser ? () => import('~/path/to/ThreejsComponent.vue') : null
@@ -92,7 +102,7 @@ export default {
         ? false
         : 'ОШИБКА'
     },
-    ...mapGetters({byPath: 'byPath', videoByPath: 'video/byPath'}),
+    ...mapGetters({ byPath: 'byPath', videoByPath: 'video/byPath' }),
     videoTechnology() {
       return this.videoByPath('technology')
     },
@@ -101,7 +111,10 @@ export default {
     },
     smallTablet() {
       return this.byPath('smallTablet')
-    }
+    },
+    modelIndex() {
+      return this.byPath('smallTablet.modelIndex')
+    },
   },
 }
 </script>

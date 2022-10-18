@@ -1,7 +1,6 @@
 <template>
   <div class="streams-container all-screen">
-    <div style="z-index: 99"> 
-      <!-- это на скорую руку чтоб работу линий проверить -->
+    <!-- <div style="z-index: 99"> 
       <div v-for="item in 7" :key="item">
         <img
           @click="streams(item)"
@@ -11,13 +10,14 @@
           alt=""
         />
       </div>
-    </div>
+    </div> -->
       <br />
       {{ streamArr }}
       <br />
       <div style="position: absolute;">
         <div class="all-screen"  v-for="(item, index) in streamArr" :key="index">
           <img
+          v-show="item === '1'"
           class="all-size"          
           :src="
             require('~/assets/picture/streams/lines/' + item + '.jpeg')
@@ -32,10 +32,23 @@
 <script>
 
 export default {
+  async asyncData({ $axios }) {
+    var flows = await $axios.$get('/api/api/flows/')
+        .then((response) => {
+          console.log(response, 'response.data')
+          return response.mask
+        });
+    flows = flows.split('')
+    
+    return { streamArr: flows }
+  },
   data() {
     return {
       streamArr: [],
     }
+  },
+  mounted() {
+    this.refreshData()
   },
   methods: {
     streams(item) {
@@ -46,6 +59,11 @@ export default {
       } else {
         this.streamArr.push(item)
       }
+    },
+    refreshData: function () {
+      setInterval(async function () {
+        await this.$nuxt.refresh()
+      }, 5000)
     },
   },
 }

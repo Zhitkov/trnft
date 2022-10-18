@@ -53,15 +53,15 @@
               style="display: flex"
               class="itemLetter"
               v-for="letterItem in letterArr.data"
-              :key="letterItem.name"
+              :key="letterItem.fio"
             >
               <!-- {{letterItem}} -->
-              <img style="width: 100px" :src="letterItem.img" alt="" />
+              <img style="width: 100px" :src="letterItem.photo" alt="" />
               <div
                 class="modal"
                 @click="
                   modal = true
-                  modalInfo = {name: letterItem.name, img: letterItem.img, desc: letterItem.desc}
+                  modalInfo = {name: letterItem.fio, img: letterItem.photo, desc: letterItem.description}
                 "
               >
                 <h4 class="text">
@@ -82,7 +82,7 @@
             class="modal"
             @click="
               modal = true
-              modalInfo = {name: user.name, img: user.img, desc: user.desc}
+              modalInfo = {name: user.fio, img: user.photo, desc: user.description}
             "
             :style="'background-image: url(' + user.img + ')'"
           >
@@ -112,6 +112,16 @@
 import keyboard from 'vue-keyboard'
 import { mapGetters } from 'vuex'
 export default {
+  async asyncData({ $axios }) {
+    var veterans = await $axios.$get('/api/api/video_stand/employee_list/veterans/')
+        .then((response) => {
+          console.log(response, 'response.data')
+          return response.employees
+        });
+    veterans.forEach((e) => {e.photo = 'http://localhost:8000/api/' + e.photo})
+    
+    return { veterans: veterans }
+  },
   data() {
     return {
       input: '',
@@ -144,15 +154,16 @@ export default {
   },
   computed: {
     ...mapGetters(['byPath']),
-    veterans() {
-      return this.byPath('humanCapital.veterans')
-    },
+    // veterans() {
+    //   return this.byPath('humanCapital.veterans')
+    // },
     arraysByAlphabet() {
+      //Здесь я разбиваю пришедший массив ветеранов на массив объектов title первая буква и внутри все ветераны с этой буквы, после сортирую по возрастанию
       return Object.values(
         this.veterans.reduce((acc, word) => {
-          let firstLetter = word.name[0].toLocaleUpperCase()
+          let firstLetter = word.fio[0].toLocaleUpperCase()
           if (!acc[firstLetter]) {
-            acc[firstLetter] = { title: firstLetter, data: [word] }
+            acc[firstLetter] = { title: firstLetter, data: [word] } 
           } else {
             acc[firstLetter].data.push(word)
           }
@@ -169,14 +180,15 @@ export default {
       )
     },
     filteredVeterans() {
+      //Здесь я фильтрую согласно инфпуту
       var users_array = this.veterans,
         searchName = this.searchName
-      if (!searchName) {
+        if (!searchName) {
         return []
       }
       searchName = searchName.trim().toLowerCase()
       users_array = users_array.filter(function (user) {
-        if (user.name.toLowerCase().indexOf(searchName) !== -1) {
+        if (user.fio.toLowerCase().indexOf(searchName) !== -1) {
           return user
         }
       })
