@@ -64,7 +64,7 @@ export default {
         })
       a.push(video)
     }
-    a.forEach((e) => {e.current_video = e.current_video})
+    a.forEach((e) => {e.current_video = process.env.BASE_URL + e.current_video})
     
     return { samaraVideos: a, stage: stage }
   },

@@ -32,7 +32,7 @@ export default {
         .$get('/api/api/timeline/' + year + '/1/')
         .then((response) => {
           console.log(response, 'response.data')
-          return response.current_video
+          return process.env.BASE_URL + response.current_video
         })
       a.push(video)
     }
