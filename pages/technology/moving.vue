@@ -1,12 +1,6 @@
 <template>
   <div class="all-screen">
-    <div class="">
-      Это двигается 
-      <NuxtLink to="/technology">эту ссылку</NuxtLink> и переключите
-    </div>
-    Сейчас выбран период {{ stage }} fixedVideo - {{ fixedVideo }}
     <div v-for="(video, index) in movingVideos" :key="index">
-      {{fixedVideo}} === {{fixedVideo}}
       <ModuleVideo
         v-if="fixedVideo === index"
         class="all-size"
@@ -14,36 +8,57 @@
         :loop="true"
       ></ModuleVideo>
     </div>
-    <div
-      class="all-screen future-moving-screen"
-      v-show="stage === 'future'"
-    >
-      <div v-show="futureMoving" class="logo-place">
-        <img src="~/assets/picture/logo.png" alt="" />
-      </div>
-
-      <!-- <div v-for="item in 180" :key="item"> -->
-      <!-- :style="'transform: scale(' + value2 + ');'" -->
-      <!-- v-show="item === value" -->
-      <div v-show="modelIndex === null" class="">
-        <div v-for="item in 5" :key="item + '1'">
-          <img :src="'/assets/picture/carousel/' + item + '.pdf'" alt="" />
-        </div>
-      </div>
-      <div v-show="modelIndex !== null" class="">
-        <div v-for="index in 3" :key="index">
-          <div v-show="index === modelIndex">
-            <VueProduct360 :images="technology.models[index]">
-              <p>Грузиться</p>
-            </VueProduct360>
+    <div style="height: 100vh; display: flex;" class="all-size corner-decoration" v-show="stage === 'future'">
+      <div class="future-moving-screen flex-center">
+        <div class="carousel" v-show="modelIndex === null">
+          <div class="logo-place">
+            <img src="~/assets/picture/logo.png" alt="" />
+          </div>
+          <div class="carousel-items">
+            <img
+              :key="item + '1'"
+              v-for="item in 5"
+              v-show="carouselIndex === item"
+              :src="require('/assets/picture/carousel/' + item + '.png')"
+              alt=""
+            />
+          </div>
+          <div class="control-elements">
+            <div @click="carouselChange(-1)" class="arrow-back">
+              <!-- <img
+                src="~/assets/picture/carousel/controlElements/arrowBack.png"
+                alt=""
+              /> -->
+            </div>
+            <div class="circle" v-for="item in 5" :key="item + '1'">
+              <img
+                v-show="carouselIndex === item"
+                src="~/assets/picture/carousel/controlElements/active.png"
+                alt=""
+              />
+              <img
+                v-show="carouselIndex !== item"
+                src="~/assets/picture/carousel/controlElements/notActive.png"
+                alt=""
+              />
+            </div>
+            <div @click="carouselChange(1)" class="arrow-forward">
+              <!-- <img
+                src="~/assets/picture/carousel/controlElements/arrowForward.png"
+                alt=""
+              /> -->
+            </div>
+          </div>
+          <div v-show="modelIndex !== null" class="">
+            <div v-for="index in 3" :key="index">
+              <div v-show="index === modelIndex">
+                <VueProduct360 :images="technology.models[index]">
+                  <p>Грузиться</p>
+                </VueProduct360>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-
-      <div class="button-place">
-        <button @click="futureMoving = !futureMoving">
-          ГЛАВНАЯ СТРАНИЦА {{ modelIndex }}
-        </button>
       </div>
     </div>
   </div>
@@ -56,28 +71,29 @@ import VueProduct360 from '@deviznet/vue-product-360'
 
 import { mapGetters } from 'vuex'
 
-
 export default {
   async asyncData({ $axios }) {
     const stage = await $axios
-        .$get('/api/api/technologies/stage/')
-        .then((response) => {
-          console.log(response, 'response.data')
-          return response.stage
-        })    
+      .$get('/api/api/technologies/stage/')
+      .then((response) => {
+        console.log(response, 'response.data')
+        return response.stage
+      })
     var a = []
-    for (const period of ['past', 'present', 'present2']) {
+    for (const period of ['past', 'present_1', 'present_2']) {
       const video = await $axios
-        .$get('api/api/technologies/moving/'+ period +'/' )
+        .$get('api/api/technologies/moving/' + period + '/')
         .then((response) => {
           console.log(response, 'response.data')
-          return process.env.BASE_URL + response.current_video
+          return response.current_video
         })
 
       a.push(video)
     }
-    a.forEach((e) => {e = 'http://localhost:8000/media/' + e})
-    
+    a.forEach((e) => {
+      e = '/media/' + e
+    })
+
     return { movingVideos: a, stage: stage }
   },
   data() {
@@ -85,11 +101,31 @@ export default {
       futureMoving: false,
       newCoords: {},
       value: 60,
-      slider: 0
+      carouselIndex: 1,
+      slider: 0,
     }
   },
   components: {
     VueProduct360,
+  },
+  methods: {
+    carouselAuto: function () {
+        setInterval(() => {
+          this.carouselChange(1)
+        }, 5000)
+      },
+    carouselChange(count) {
+      this.carouselIndex += count
+      if (this.carouselIndex === 6) {
+        this.carouselIndex = 1
+      }
+      if (this.carouselIndex === 0) {
+        this.carouselIndex = 5
+      }
+    },
+  },
+  mounted() {
+    this.carouselAuto()
   },
   // mounted() {
   //   this.changePos = function (pos) {
@@ -139,4 +175,53 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.future-moving-screen {
+  /* padding: 10vh 0; */
+  height: 80vh;
+}
+.future-moving-screen > .carousel > .logo-place {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.future-moving-screen > .carousel > .logo-place {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  width: 100%;
+}
+.future-moving-screen > .carousel > .logo-place > img {
+  width: 80%;
+  display: flex;
+  justify-self: center;
+  align-self: center;
+}
+
+.future-moving-screen > .carousel > .carousel-items {
+  height: 80%;
+  display: flex;
+}
+.future-moving-screen > .carousel > div {
+  display: flex;
+  justify-content: center;
+  /* padding: 10% 0%; */
+}
+.future-moving-screen > .carousel > div > img {
+  padding: 10% 0%;
+  width: 80%;
+  height: 80%;
+}
+.future-moving-screen > .carousel > .control-elements {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 10%;
+}
+.future-moving-screen > .carousel > .control-elements > div {
+  width: 10%;
+}
+.future-moving-screen > .carousel > .control-elements > div > img {
+  width: 100%;
+}
+</style>

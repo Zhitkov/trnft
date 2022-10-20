@@ -2,7 +2,7 @@
   <div>
     <video-player
       ref="videoPlay"
-      :src="videoSrc"
+      :src="'localhost:8000' + videoSrc"
       :autoPlay="true"
       :loop="loop"
       :width="'100%'"

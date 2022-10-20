@@ -4,7 +4,7 @@
       @click="returnToMain()"
       v-show="showControl"
       class="human_capital-back"
-      src="~/assets/creative/sidewitharrow.svg"
+      src="~/assets/creative/sidewitharrow.png"
       alt=""
     />
     <ModuleBtnCollection

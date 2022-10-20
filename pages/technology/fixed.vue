@@ -30,7 +30,7 @@ export default {
           return response.stage
         })    
     var a = []
-    for (const period of ['past', 'present', 'present2']) {
+    for (const period of ['past', 'present_1', 'present_2', 'future']) {
       const video = await $axios
         .$get('api/api/technologies/backstage/'+ period +'/' )
         .then((response) => {
@@ -40,7 +40,7 @@ export default {
 
       a.push(video)
     }
-    a.forEach((e) => {e = 'http://localhost:8000/media/' + e})
+    a.forEach((e) => {e = '/media/' + e})
     
     return { fixedVideos: a, stage: stage }
   },

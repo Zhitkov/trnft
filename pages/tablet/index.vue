@@ -39,7 +39,7 @@
         @click="returnToMain()"
         v-show="title"
         class="human_capital-back"
-        src="~/assets/creative/sidewitharrow.svg"
+        src="~/assets/creative/sidewitharrow.png"
         alt=""
       />
       <ModuleBtnCollection

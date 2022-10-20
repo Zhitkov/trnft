@@ -69,7 +69,7 @@ export default {
   background-image: url('~/assets/creative/btnwitharrow.png');
 }
 .rbbtn {
-  background-image: url('~/assets/creative/rbbtn.svg');
+  background-image: url('~/assets/creative/rbbtn.png');
 }
 .rbsmbtn {
   background-image: url('~/assets/creative/rbsmbtn.svg');

@@ -1,18 +1,29 @@
 <template>
   <div class="all-screen">
-    <ModuleVideo :videoSrc="entryGroup.right" :loop="true"></ModuleVideo>
+    {{entryGroup}}
+    <ModuleVideo class="all-size" :videoSrc="entryGroup" :loop="true"></ModuleVideo>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-
+// /video_stand/page/
 export default {
+  async asyncData({ $axios }) {
+    const video = await $axios
+        .$get('/api/api/entry_group/video/')
+        .then((response) => {
+          console.log(response, 'response.data')
+          return response.current_video
+        })
+    
+    return { entryGroup: video }
+  },
   computed: {
     ...mapGetters({videoByPath: 'video/byPath'}),
-    entryGroup() {
-      return this.videoByPath('entryGroup')
-    }
+    // entryGroup() {
+    //   return this.videoByPath('entryGroup')
+    // }
   },
 }
 </script>

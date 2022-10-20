@@ -18,6 +18,9 @@ export default {
 </script>
 
 <style>
+.nuxt-progress {
+  display: none !important;
+}
   body {
     margin: 0 !important;
   }
@@ -54,7 +57,7 @@ div.mx-video-player__mask-progress.mx-video-player__mask-progress_show {
 
 .corner-decoration {
   background-image: url('~/assets/creative/rbcornert.png'), url('~/assets/creative/rbcornerb.png'), url('~/assets/creative/fon.png');
-  background-size:350px, 350px, 100vw 100vh ;
+  background-size:55vw, 55vw, 100vw 100vh ;
   background-position: left top, right bottom, center;
   background-repeat: no-repeat, no-repeat;
 }

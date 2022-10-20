@@ -118,7 +118,7 @@ export default {
           console.log(response, 'response.data')
           return response.employees
         });
-    veterans.forEach((e) => {e.photo = 'http://localhost:8000/media/' + e.photo})
+    veterans.forEach((e) => {e.photo = '/media/' + e.photo})
     
     return { veterans: veterans }
   },
