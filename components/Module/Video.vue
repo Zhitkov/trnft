@@ -2,7 +2,7 @@
   <div>
     <video-player
       ref="videoPlay"
-      :src="'localhost:8000' + videoSrc"
+      :src="trueVideoSrc"
       :autoPlay="true"
       :loop="loop"
       :width="'100%'"
@@ -94,11 +94,11 @@ export default {
       console.log('12', info.currentTime)
     },
   },
-  // computed: {
-  //   ...mapGetters({
-  //     infoStatus: 'infoStatus',
-  //   })
-  // }
+  computed: {
+    trueVideoSrc() {
+      return 'localhost:8000' + this.videoSrc
+    }
+  },
   // watch: {
   //   'playerOptions.src': function () {
   //     this.$nextTick(function () {
