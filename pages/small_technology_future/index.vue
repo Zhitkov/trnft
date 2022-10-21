@@ -78,7 +78,7 @@ export default {
 .human_capital-back {
   position: absolute;
   left: 0;
-  top: 40vh;
-  width: 2vw;
+  top: 30vh;
+  width: 2.8vw;
 }
 </style>

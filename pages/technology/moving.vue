@@ -8,7 +8,11 @@
         :loop="true"
       ></ModuleVideo>
     </div>
-    <div style="height: 100vh; display: flex;" class="all-size corner-decoration" v-show="stage === 'future'">
+    <div
+      style="height: 100vh; display: flex"
+      class="all-size corner-decoration"
+      v-show="stage === 'future'"
+    >
       <div class="future-moving-screen flex-center">
         <div class="carousel" v-show="modelIndex === null">
           <div class="logo-place">
@@ -49,16 +53,19 @@
               /> -->
             </div>
           </div>
+        </div>
           <div v-show="modelIndex !== null" class="">
             <div v-for="index in 3" :key="index">
               <div v-show="index === modelIndex">
-                <VueProduct360 :images="technology.models[index]">
+                <Vue360Spinner
+                  :reverse="true"
+                  :images="models[index]"
+                >
                   <p>Грузиться</p>
-                </VueProduct360>
+                </Vue360Spinner>
               </div>
             </div>
           </div>
-        </div>
       </div>
     </div>
   </div>
@@ -67,7 +74,7 @@
 <script>
 // import 'vue-range-component/dist/vue-range-slider.css'
 // import VueRangeSlider from 'vue-range-component'
-import VueProduct360 from '@deviznet/vue-product-360'
+// import VueProduct360 from '@deviznet/vue-product-360'
 
 import { mapGetters } from 'vuex'
 
@@ -105,15 +112,21 @@ export default {
       slider: 0,
     }
   },
-  components: {
-    VueProduct360,
-  },
+  // watch: {
+  //   modelValue(mv) {
+  //     this.CHANGE_BY_PATH(['smallTablet.modelValue', mv])
+  //   },
+  // },
   methods: {
     carouselAuto: function () {
-        setInterval(() => {
-          this.carouselChange(1)
-        }, 5000)
-      },
+      setInterval(() => {
+        this.carouselChange(1)
+      }, 5000)
+    },
+    // changeModelValue (newVal) {
+    //   console.log('changeModelValue', newVal)
+    //   this.modelValue = newVal
+    // },
     carouselChange(count) {
       this.carouselIndex += count
       if (this.carouselIndex === 6) {
@@ -170,6 +183,9 @@ export default {
     },
     modelIndex() {
       return this.byPath('smallTablet.modelIndex')
+    },
+    models() {
+      return this.byPath('technology.models')
     },
   },
 }

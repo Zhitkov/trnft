@@ -53,6 +53,10 @@ export default {
   text-align: center;
   font-size: 36pt;
 }
+.btnsStyle > .btn-text{
+  width: 70%;
+  font-size: 15px;
+}
 .btnsStyle {
   width: 27vw;
   color: #025692;
@@ -70,6 +74,7 @@ export default {
 }
 .rbbtn {
   background-image: url('~/assets/creative/rbbtn.png');
+  color: white;
 }
 .rbsmbtn {
   background-image: url('~/assets/creative/rbsmbtn.svg');
