@@ -8,7 +8,7 @@ export default {
     refreshData: function () {
         setInterval(async function () {
           await this.$nuxt.refresh()
-        }, 5000)
+        }, 500)
       },
   },
     mounted() {

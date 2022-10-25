@@ -112,7 +112,7 @@ export default {
               this.CHANGE_BY_PATH(['samara.start', true])
               this.CHANGE_BY_PATH(['samara.counter', 1])
               await this.$axios
-                .$post('http://localhost:8000/api/area_samara/stage/', {
+                .$post('/api/area_samara/stage/', {
                   stage: 1,
                 })
                 .then(function (response) {
@@ -123,9 +123,9 @@ export default {
                 })
             } else {
               await this.$axios
-                .$post('http://localhost:8000/api/area_samara/stage/', {
+                .$post('/api/area_samara/stage/', {
                   stage: btn.link,
-                })
+                }, )
                 .then(function (response) {
                   console.log(response)
                 })
@@ -138,7 +138,7 @@ export default {
             // let data = JSON.stringify({year: btn.name})
             console.log({ year: btn.name })
             await this.$axios
-              .$post('http://localhost:8000/api/timeline/year/', {
+              .$post('/api/timeline/year/', {
                 year: btn.name,
               })
               .then(function (response) {
@@ -152,7 +152,7 @@ export default {
           case 'changeScreenPosition':
             console.log(btn.link, 'alskdfjlsdhfoisehfu');
           await this.$axios
-            .$post('http://localhost:8000/api/technologies/stage/', {
+            .$post('/api/technologies/stage/', {
               stage: btn.link,
             })
             .then(function (response) {

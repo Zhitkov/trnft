@@ -1,4 +1,4 @@
-const BASE_URL= 'http://192.168.88.216:8000'; //TODO move to .env
+const BASE_URL = 'http://192.168.88.216:8000'; //TODO move to .env
 
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
@@ -61,26 +61,18 @@ export default {
     '/api': {
       target: BASE_URL,
       changeOrigin: true,
-      pathRewrite: { '^/api': '/' },
     },
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     proxy: true,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
+    },
     proxyHeaders: true,
     credentials: true,
-    baseURL: BASE_URL, //
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-  },
-  publicRuntimeConfig: {
-    axios: {
-      browserBaseURL: process.env.BROWSER_BASE_URL
-    }
-  },
-  privateRuntimeConfig: {
-    axios: {
-      baseURL: process.env.BASE_URL
-    }
   },
 }

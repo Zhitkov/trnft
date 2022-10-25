@@ -1,6 +1,6 @@
 <template>
   <div class="streams-container all-screen">
-    <!-- <div style="z-index: 99"> 
+    <!-- <div style="z-index: 99">
       <div v-for="item in 7" :key="item">
         <img
           @click="streams(item)"
@@ -18,7 +18,7 @@
         <div class="all-screen"  v-for="(item, index) in streamArr" :key="index">
           <img
           v-show="item === '1'"
-          class="all-size"          
+          class="all-size"
           :src="
             require('~/assets/picture/streams/lines/' + item + '.jpeg')
           "
@@ -33,13 +33,13 @@
 
 export default {
   async asyncData({ $axios }) {
-    var flows = await $axios.$get('/api/api/flows/')
+    var flows = await $axios.$get('/api/flows/')
         .then((response) => {
           console.log(response, 'response.data')
           return response.mask
         });
     flows = flows.split('')
-    
+
     return { streamArr: flows }
   },
   data() {

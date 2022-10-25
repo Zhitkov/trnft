@@ -37,7 +37,7 @@ export default {
     async pusk(index) {
       // this.CHANGE_SAMARA_VIDEO(index);
       await this.$axios
-        .$post('http://localhost:8000/api/area_samara/stage/', {stage: index,})
+        .$post('/api/area_samara/stage/', {stage: index,})
         .then(function (response) {
           console.log(response)
         })
@@ -56,7 +56,7 @@ export default {
       this.CHANGE_BY_PATH(['samara.start', true])
       this.CHANGE_BY_PATH(['samara.counter', 1])
       await this.$axios
-        .$post('http://localhost:8000/api/area_samara/stage/', {
+        .$post('/api/area_samara/stage/', {
           stage: 1,
         })
         .then(function (response) {
