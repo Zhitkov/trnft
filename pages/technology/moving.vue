@@ -54,12 +54,13 @@
             </div>
           </div>
         </div>
-          <div v-show="modelIndex !== null" class="">
-            <div v-for="index in 3" :key="index">
-              <div v-show="index === modelIndex">
+          <div class="all-screen" v-show="modelIndex !== null">
+            <div class="all-size" v-show="index === modelIndex" v-for="index in 3" :key="index">
+              <div class="all-size" >
                 <Vue360Spinner
                   :reverse="true"
                   :images="models[index]"
+                  :remove360="true"
                 >
                   <p>Грузиться</p>
                 </Vue360Spinner>
@@ -192,6 +193,8 @@ export default {
 </script>
 
 <style>
+
+
 .future-moving-screen {
   /* padding: 10vh 0; */
   height: 80vh;

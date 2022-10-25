@@ -85,7 +85,7 @@ export default {
 .vue-product-360 > img[draggable="false"]:last-child {
   height: 20%;
 }
-.vue-product-360 > img[draggable="false"]:first-child {
+/* .vue-product-360 > img[draggable="false"]:first-child {
   height: 55%;
-}
+} */
 </style>

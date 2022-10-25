@@ -52,6 +52,7 @@ export default {
   methods: {
     ...mapMutations(['CHANGE_BY_PATH']),
     returnToMain() {
+      this.CHANGE_BY_PATH(['smallTablet.modelIndex', null])
       this.showControl = false
     },
     changeModelIndex(btn) {
