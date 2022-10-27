@@ -11,12 +11,12 @@ import { mapGetters } from 'vuex'
 export default {
   async asyncData({ $axios }) {
     const video = await $axios
-        .$get('/api/api/entry_group/video/')
+        .$get('/api/entry_group/video/')
         .then((response) => {
           console.log(response, 'response.data')
           return process.env.BASE_URL + response.current_video
         })
-    
+
     return { entryGroup: video }
   },
   computed: {

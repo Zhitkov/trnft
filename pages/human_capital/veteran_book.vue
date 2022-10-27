@@ -40,7 +40,7 @@
       <div
         v-show="!modal"
         :style="'z-index: ' + (visibleKeyboard ? 3 : 6)"
-        
+
       >
         <div class="v-container v-grid" :style="'z-index: ' + (visibleKeyboard ? 3 : 6)" v-show="filteredVeterans.length === 0">
           <div
@@ -113,13 +113,12 @@ import keyboard from 'vue-keyboard'
 import { mapGetters } from 'vuex'
 export default {
   async asyncData({ $axios }) {
-    var veterans = await $axios.$get('/api/api/video_stand/employee_list/veterans/')
+    var veterans = await $axios.$get('/api/video_stand/employee_list/veterans/')
         .then((response) => {
           console.log(response, 'response.data')
           return response.employees
         });
-    veterans.forEach((e) => {e.photo = '/media/' + e.photo})
-    
+    veterans.forEach((e) => {e.photo = process.env.BASE_URL + '/media/' + e.photo})
     return { veterans: veterans }
   },
   data() {
@@ -163,7 +162,7 @@ export default {
         this.veterans.reduce((acc, word) => {
           let firstLetter = word.fio[0].toLocaleUpperCase()
           if (!acc[firstLetter]) {
-            acc[firstLetter] = { title: firstLetter, data: [word] } 
+            acc[firstLetter] = { title: firstLetter, data: [word] }
           } else {
             acc[firstLetter].data.push(word)
           }

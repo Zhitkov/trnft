@@ -49,7 +49,7 @@ import { mapGetters, mapMutations } from 'vuex'
 export default {
   async asyncData({ $axios }) {
     const stage = await $axios
-        .$get('/api/api/area_samara/stage/')
+        .$get('/api/area_samara/stage/')
         .then((response) => {
           console.log(response, 'response.data')
           return response.stage
@@ -57,7 +57,7 @@ export default {
     var a = []
     for (let count = 1; count <= 4; count++) {
       const video = await $axios
-        .$get('/api/api/area_samara/' + count + '/video/')
+        .$get('/api/area_samara/' + count + '/video/')
         .then((response) => {
           console.log(response, 'response.data')
           return response
@@ -65,7 +65,7 @@ export default {
       a.push(video)
     }
     a.forEach((e) => {e.current_video = process.env.BASE_URL + e.current_video})
-    
+
     return { samaraVideos: a, stage: stage }
   },
   // samara: {
@@ -105,7 +105,7 @@ export default {
         console.log(newStage, 'newStage');
         // this.CHANGE_SAMARA_VIDEO(this.samara.counter + 1)
         await this.$axios
-        .$post('http://localhost:8000/api/area_samara/stage/', {stage: newStage,})
+        .$post('/api/area_samara/stage/', {stage: newStage,})
         .then(function (response) {
           console.log(response)
         })

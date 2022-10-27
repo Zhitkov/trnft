@@ -29,11 +29,11 @@ import { mapGetters, mapMutations } from 'vuex'
 export default {
   async asyncData({ $axios }) {
     const stage = await $axios
-        .$get('/api/api/technologies/stage/')
+        .$get('/api/technologies/stage/')
         .then((response) => {
           console.log(response, 'response.data')
           return response.stage
-        })    
+        })
     return { stage: stage }
   },
   computed: {
@@ -45,7 +45,7 @@ export default {
   methods: {
     async changeStage(stage) {
       await this.$axios
-        .$post('http://localhost:8000/api/technologies/stage/', {
+        .$post('/api/technologies/stage/', {
           stage: stage,
         })
         .then(function (response) {

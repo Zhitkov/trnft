@@ -20,7 +20,7 @@ import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   async asyncData({ $axios }) {
-    const chosenYear = await $axios.$get('/api/api/timeline/year/')
+    const chosenYear = await $axios.$get('/api/timeline/year/')
     // const chosenYear = await $axios.$get(api + '/api/timeline/year/')
         .then((response) => {
           console.log(response, 'response.data')
@@ -29,14 +29,14 @@ export default {
     var a = []
     for (const year of ['1936', '1953', '1961', '1970', '1980s', '1990s', '2000s', '2010s']) {
       const video = await $axios
-        .$get('/api/api/timeline/' + year + '/1/')
+        .$get('/api/timeline/' + year + '/1/')
         .then((response) => {
           console.log(response, 'response.data')
           return process.env.BASE_URL + response.current_video
         })
       a.push(video)
     }
-    
+
     return { newVideos: a, chosenYear: chosenYear }
   },
   // data() {
@@ -66,7 +66,7 @@ export default {
     }
     if (counter >= 7) {
       await this.$axios
-              .$post('http://localhost:8000/api/timeline/year/', {year: newYear})
+              .$post('/api/timeline/year/', {year: newYear})
               .then(function (response) {
                 console.log(response)
               })
@@ -76,7 +76,7 @@ export default {
 
     } else {
       await this.$axios
-              .$post('http://localhost:8000/api/timeline/year/', {year: newYear})
+              .$post('/api/timeline/year/', {year: newYear})
               .then(function (response) {
                 console.log(response)
               })

@@ -24,15 +24,15 @@ import { mapGetters } from 'vuex'
 export default {
   async asyncData({ $axios }) {
     const stage = await $axios
-        .$get('/api/api/technologies/stage/')
+        .$get('/api/technologies/stage/')
         .then((response) => {
           console.log(response, 'response.data')
           return response.stage
-        })    
+        })
     var a = []
     for (const period of ['past', 'present_1', 'present_2', 'future']) {
       const video = await $axios
-        .$get('api/api/technologies/backstage/'+ period +'/' )
+        .$get('api/technologies/backstage/'+ period +'/' )
         .then((response) => {
           console.log(response, 'response.data')
           return process.env.BASE_URL + response.current_video
@@ -41,7 +41,7 @@ export default {
       a.push(video)
     }
     a.forEach((e) => {e = '/media/' + e})
-    
+
     return { fixedVideos: a, stage: stage }
   },
   computed: {
