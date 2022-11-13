@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
-    "build_start":  "yarn run build && yarn run start",
+    "build_start": "yarn run build && yarn run start",
     "start": "nuxt start",
     "generate": "nuxt generate",
     "lint:prettier": "prettier --check .",
@@ -28,6 +28,7 @@
     "webpack": "^4.46.0"
   },
   "devDependencies": {
+    "@bazzite/nuxt-optimized-images": "^0.4.0",
     "eslint-config-prettier": "^8.3.0",
     "prettier": "^2.5.1"
   }

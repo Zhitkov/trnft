@@ -69,4 +69,23 @@ div.mx-video-player__mask-progress.mx-video-player__mask-progress_show {
 html {
     font-family: "Open Sans";
 }
+
+.half-enter-active,
+.half-leave-active,
+.half-leave-from-class,
+.half-enter-from-class,
+.half-enter-active-class,
+.half-enter-to-class,
+.half-leave-from-class,
+.half-leave-active-class,
+.half-leave-to-class {
+transition: opacity 2s ease;
+}
+.half-enter,
+.half-leave-to,
+.half-enter-from,
+.half-leave-to,
+.half-leave-from-class {
+opacity: 0;
+}
 </style>

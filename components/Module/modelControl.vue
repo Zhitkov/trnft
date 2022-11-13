@@ -1,8 +1,8 @@
 <template>
   <div class="all-size flex-center" style="align-items: center">
     <div class="sliderus">
-      <div v-for="index in 3" :key="index">
-        <div v-show="index === modelIndex">
+      <div v-show="index === modelIndex" v-for="index in 3" :key="index">
+        <div>
           <Vue360Spinner
             :reverse="true"
             @changeCurrent="changeModelValue"

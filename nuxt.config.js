@@ -1,4 +1,4 @@
-const BASE_URL = 'http://192.168.88.216:8000'; //TODO move to .env
+const BASE_URL = 'http://localhost:8000'; //TODO move to .env
 
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
@@ -42,13 +42,8 @@ export default {
       '~/components'
     ]
   },
-    build: {
-      transpile:  "three"
-    },
-
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: [],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [

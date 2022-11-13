@@ -19,36 +19,49 @@
         class="all-size flex-center chosen-veteran-container"
         style="align-items: center"
         v-show="modal && !visibleKeyboard"
-        :style="'z-index: ' + (!modal&&visibleKeyboard ? 3 : 6)"
+        :style="'z-index: ' + (!modal && visibleKeyboard ? 3 : 6)"
       >
         <div class="chosen-veteran">
           <div class="chosen-veteran-img">
-            <img :src="modalInfo.img" alt="">
+            <img :src="modalInfo.img" alt="" />
           </div>
           <div class="chosen-veteran-desc">
-            <h2>{{modalInfo.name}}</h2>
-            <p>{{modalInfo.desc}}</p>
-            <div style="width: 100%;text-align: center;">
+            <h2>{{ modalInfo.name }}</h2>
+            <p>{{ modalInfo.desc }}</p>
+            <div style="width: 100%; text-align: center">
               <div @click="modal = false">
-                <div class="btnwitharrow" style="background-size: contain; background-repeat: no-repeat; background-position: center center;">Назад</div>
+                <div
+                  class="btnwitharrow"
+                  style="
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                    background-position: center center;
+                  "
+                >
+                  Назад
+                </div>
               </div>
             </div>
           </div>
         </div>
         <!-- Знаю бред, потом сверстаю нормальную модалку, пока так  -->
       </div>
-      <div
-        v-show="!modal"
-        :style="'z-index: ' + (visibleKeyboard ? 3 : 6)"
-
-      >
-        <div class="v-container v-grid" :style="'z-index: ' + (visibleKeyboard ? 3 : 6)" v-show="filteredVeterans.length === 0">
+      <div v-show="!modal" :style="'z-index: ' + (visibleKeyboard ? 3 : 6)">
+        <div
+          class="v-container v-grid"
+          :style="'z-index: ' + (visibleKeyboard ? 3 : 6)"
+          v-show="filteredVeterans.length === 0"
+        >
           <div
             style="color: white"
             v-for="letterArr in arraysByAlphabet"
             :key="letterArr.title"
           >
-            <label style="text-align: center;" for="div.itemLetter"><h4 style=" background-color: #ffffff0f;">{{ letterArr.title }}</h4></label>
+            <label style="text-align: center" for="div.itemLetter"
+              ><h4 style="background-color: #ffffff0f">
+                {{ letterArr.title }}
+              </h4></label
+            >
             <div
               style="display: flex"
               class="itemLetter"
@@ -61,7 +74,11 @@
                 class="modal"
                 @click="
                   modal = true
-                  modalInfo = {name: letterItem.fio, img: letterItem.photo, desc: letterItem.description}
+                  modalInfo = {
+                    name: letterItem.fio,
+                    img: letterItem.photo,
+                    desc: letterItem.description,
+                  }
                 "
               >
                 <h4 class="text">
@@ -71,37 +88,41 @@
             </div>
           </div>
         </div>
-        <div class="v-container" style="gap: 30px;">
-        <div
-          class="v"
-          style="width: auto"
-          v-for="(user, index) in filteredVeterans"
-          :key="index"
-        >
+        <div class="v-container" style="gap: 30px">
           <div
-            class="modal"
-            @click="
-              modal = true
-              modalInfo = {name: user.fio, img: user.photo, desc: user.description}
-            "
-            :style="'background-image: url(' + user.photo + ')'"
+            class="v"
+            style="width: auto"
+            v-for="(user, index) in filteredVeterans"
+            :key="index"
           >
-            <h3 class="text">
-              {{ user.fio }}
-            </h3>
+            <div
+              class="modal"
+              @click="
+                modal = true
+                modalInfo = {
+                  name: user.fio,
+                  img: user.photo,
+                  desc: user.description,
+                }
+              "
+              :style="'background-image: url(' + user.photo + ')'"
+            >
+              <h3 class="text">
+                {{ user.fio }}жыдлпазвалп
+              </h3>
+            </div>
           </div>
         </div>
       </div>
-      </div>
     </div>
-    <div class="ui-keyboard-case">
+    <div :class="visibleKeyboard?'corner-decoration':''" class="ui-keyboard-case">
       <keyboard
         v-show="visibleKeyboard"
         v-model="searchName"
         @custom="custom"
         :layouts="[
-          '1234567890{delete:backspace}|йцукенгшщз|фывапролд|{shift:goto:1}ячсмить|{Space:space}{Enter:custom}',
-          '1234567890{delete:backspace}|ЙЦУКЕНГШЩЗ|ФЫВАПРОЛД|{shift:goto:0}ЯЧСМИТЬ|{Space:space}{Enter:custom}',
+          'йцукенгшщз{delete:backspace}|фывапролд|ячсмить|{shift:goto:1}{Space:space}{Enter:custom}',
+          'ЙЦУКЕНГШЩЗ{delete:backspace}|ФЫВАПРОЛД|ЯЧСМИТЬ|{shift:goto:0}{Space:space}{Enter:custom}',
         ]"
       ></keyboard>
     </div>
@@ -113,12 +134,15 @@ import keyboard from 'vue-keyboard'
 import { mapGetters } from 'vuex'
 export default {
   async asyncData({ $axios }) {
-    var veterans = await $axios.$get('/api/video_stand/employee_list/veterans/')
-        .then((response) => {
-          console.log(response, 'response.data')
-          return response.employees
-        });
-    veterans.forEach((e) => {e.photo = process.env.BASE_URL + '/media/' + e.photo})
+    var veterans = await $axios
+      .$get('/api/video_stand/employee_list/veterans/')
+      .then((response) => {
+        console.log(response, 'response.data')
+        return response.employees
+      })
+    veterans.forEach((e) => {
+      e.photo = process.env.BASE_URL + '/media/' + e.photo
+    })
     return { veterans: veterans }
   },
   data() {
@@ -182,7 +206,7 @@ export default {
       //Здесь я фильтрую согласно инфпуту
       var users_array = this.veterans,
         searchName = this.searchName
-        if (!searchName) {
+      if (!searchName) {
         return []
       }
       searchName = searchName.trim().toLowerCase()
@@ -216,7 +240,6 @@ export default {
   z-index: 3;
   flex-wrap: wrap;
   justify-content: flex-start;
-
 }
 .v-container > .v > .modal > h3.text {
   background-image: linear-gradient(180deg, #00000000, #000000ff);
@@ -242,10 +265,10 @@ export default {
   display: flex;
   z-index: 6;
 }
-.vue-keyboard-key {
+/* .vue-keyboard-key {
   background: #1777bba0;
   color: white;
-}
+} */
 .ui-keyboard-case {
   border: none !important;
 }
@@ -267,23 +290,39 @@ export default {
   justify-content: center;
   align-items: center;
   z-index: 3;
+
+  padding: 0;
+  margin-right: 0;
   /* left: 25%; */
   /* top: auto;
     bottom: 0px; */
   /* position: fixed; */
 }
-button.vue-keyboard-key:nth-child(11),
+/* button.vue-keyboard-key:nth-child(11),
 div.vue-keyboard-row:nth-child(4) > button:nth-child(1),
 div.vue-keyboard-row:nth-child(5) > button:nth-child(1),
 button.action:nth-child(2) {
   background-color: red;
   color: black;
+} */
+.vue-keyboard-key {
+  background-color: white;
+  color: black;
+  box-shadow: black 3px 3px 3px;
+  width: 65px;
+  height: 60px;
+  font-size: 17px;
+  padding: 0;
+  margin: 5px;
+  color: black;
+  box-shadow: #8e8e8e 1px 1px 1px 1.3px;
+  margin: 5px;
 }
 
 .chosen-veteran {
   display: flex;
   flex-direction: row;
-  height: 59%;
+  height: 52%;
   width: 80vw;
   background-image: url('~/assets/creative/chosenVeteranBg.svg');
   background-repeat: no-repeat;
@@ -291,11 +330,11 @@ button.action:nth-child(2) {
 }
 .chosen-veteran > .chosen-veteran-img {
   height: 100%;
-  width:auto;
+  width: auto;
 }
 .chosen-veteran > .chosen-veteran-img > img {
   height: 100%;
-  width:auto;
+  width: auto;
 }
 .chosen-veteran > .chosen-veteran-desc {
   display: flex;
@@ -313,6 +352,4 @@ button.action:nth-child(2) {
   width: 90%;
   margin: 0;
 }
-
 </style>
-

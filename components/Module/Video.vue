@@ -1,5 +1,6 @@
 <template>
   <div>
+    <transition name="half">
     <video-player
       ref="videoPlay"
       :src="videoSrc"
@@ -21,6 +22,7 @@
       @enterWebFullscreen="onEnterWebFullscreen"
       @cancelWebFullscreen="onCancelWebFullscreen"
     ></video-player>
+    </transition>
   </div>
 </template>
 
