@@ -5,10 +5,18 @@
       {{ video.name }}
       {{ newVideos[index] }}
       <ModuleVideo
+      v-show="intro"
+      v-if="video.name === chosenYear"
+      :videoSrc="'http://localhost:8000/media/static/timeline/video/headcamp_VVqtVn4.mp4'"
+      :loop="false"
+      :pause="timeline.pause"
+      @ended="intro = false"
+        ></ModuleVideo>
+        <ModuleVideo
+        v-show="!intro"
         v-if="video.name === chosenYear"
         :videoSrc="newVideos[index]"
-        :loop="false"
-        @ended="changeTimeline()"
+        :loop="true"
         :pause="timeline.pause"
       ></ModuleVideo>
     </div>
@@ -39,11 +47,16 @@ export default {
 
     return { newVideos: a, chosenYear: chosenYear }
   },
-  // data() {
-  //   return {
-  //     counter: 0,
-  //   }
-  // },
+  data() {
+    return {
+      intro: true,
+    }
+  },
+  watcher: {
+    chosenYear() {
+      this.intro = true
+    }
+  },
   computed: {
     ...mapGetters({ videoByPath: 'btns/byPath', byPath: 'byPath' }),
     timeline() {

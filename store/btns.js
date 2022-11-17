@@ -44,7 +44,7 @@ export const state = () => ({
         name: 'Какаято кнопка',
       },
     ],
-    samaraButtons: [
+    samara: [
         {
           link: 1,
           name: 'Этап 1',
@@ -66,14 +66,14 @@ export const state = () => ({
           name: 'Пуск',
         },
       ],
-    samara: [
-      {
-          link: 'samaraButtons',
-          name: 'Кнопки Самары',
-        },
+    // samara: [
+    //   {
+    //       link: 'samaraButtons',
+    //       name: 'Кнопки Самары',
+    //     },
       
-    ],
-    changeScreenPosition: [
+    // ],
+    technology: [
         {
           link: 'past',
           name: 'Прошлое',
@@ -91,14 +91,14 @@ export const state = () => ({
           name: 'Будущее',
         },
       ],
-    technology: [
+    // technology: [
       
-        {
-          link: 'changeScreenPosition',
-          name: 'Перемещение Экрана',
-        },
-    ],
-    changeYear: [
+    //     {
+    //       link: 'changeScreenPosition',
+    //       name: 'Перемещение Экрана',
+    //     },
+    // ],
+    timeline: [
         {
           name: '1936',
         },
@@ -124,12 +124,12 @@ export const state = () => ({
           name: '2010s',
         }
       ],
-    timeline: [
-        {
-          link: 'changeYear',
-          name: 'Переключение годов',
-        },
-      ],
+    // timeline: [
+    //     {
+    //       link: 'changeYear',
+    //       name: 'Переключение годов',
+    //     },
+    //   ],
       
   },
   smallTablet: {

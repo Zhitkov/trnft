@@ -5,11 +5,13 @@
     </div>
     <h1 v-show="btnTitle" class="title">{{ btnTitle }}</h1>
     <div :class="btnStyle + ' btn-container'">
-      <div v-for="btn in btnArray" :class="' flex-center'" :key="btn.name">
+    <transition-group name="btns" class=" flex-center" style="flex-wrap: wrap;">
+      <div v-for="btn in btnArray"  :key="btn.name">
         <div :class="btnImg + ' btnsStyle'" @click="changeBtns(btn)">
           <b class="btn-text" v-html="btn.name"></b>
         </div>
       </div>
+    </transition-group>
     </div>
   </div>
 </template>

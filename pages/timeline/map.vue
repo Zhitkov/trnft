@@ -4,13 +4,26 @@
     <div v-for="(video, index) in allYears" :key="index">
       {{ video.name }}
       {{ newVideos[index] }}
-      <ModuleVideo
+      <div class="" v-show="intro">это интро</div>
+      <Transition>
+        <ModuleVideo
+        v-show="intro"
+        v-if="video.name === chosenYear"
+        :videoSrc="'http://localhost:8000/media/static/timeline/video/headcamp_VVqtVn4.mp4'"
+        :loop="false"
+        :pause="timeline.pause"
+        @ended="intro = false"
+        ></ModuleVideo>
+      </transition>
+      <Transition>
+        <ModuleVideo
+        v-show="!intro"
         v-if="video.name === chosenYear"
         :videoSrc="newVideos[index]"
-        :loop="false"
-        @ended="changeTimeline()"
+        :loop="true"
         :pause="timeline.pause"
-      ></ModuleVideo>
+        ></ModuleVideo>
+      </transition>
     </div>
   </div>
 </template>
@@ -39,11 +52,11 @@ export default {
 
     return { newVideos: a, chosenYear: chosenYear }
   },
-  // data() {
-  //   return {
-  //     counter: 0,
-  //   }
-  // },
+  data() {
+    return {
+      intro: true,
+    }
+  },
   computed: {
     ...mapGetters({ videoByPath: 'btns/byPath', byPath: 'byPath' }),
     timeline() {
@@ -53,6 +66,12 @@ export default {
       return this.videoByPath('tablet.changeYear')
     },
   },
+  watcher: {
+    chosenYear() {
+      this.intro = true
+    }
+  },
+  
   // mounted() {
   //   this.refreshData()
   // },

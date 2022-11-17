@@ -80,6 +80,7 @@ html {
 .half-leave-active-class,
 .half-leave-to-class {
 transition: opacity 2s ease;
+opacity: 1;
 }
 .half-enter,
 .half-leave-to,
@@ -87,5 +88,34 @@ transition: opacity 2s ease;
 .half-leave-to,
 .half-leave-from-class {
 opacity: 0;
+}
+
+.btns-enter-active {
+  animation: bounce-in 0.5s;
+}
+/* .bounce-leave-active {
+  animation: bounce-in 0.5s reverse;
+} */
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }
 </style>

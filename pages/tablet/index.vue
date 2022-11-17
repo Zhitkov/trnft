@@ -139,7 +139,7 @@ export default {
             console.log({ year: btn.name })
             await this.$axios
               .$post('/api/timeline/year/', {
-                year: btn.name,
+                year: btn.name
               })
               .then(function (response) {
                 console.log(response)
@@ -147,7 +147,6 @@ export default {
               .catch(function (error) {
                 console.log(error)
               })
-            // this.CHANGE_TIMELINE_VIDEO(btn.link)
             break
           case 'changeScreenPosition':
             console.log(btn.link, 'alskdfjlsdhfoisehfu');

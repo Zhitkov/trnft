@@ -7,14 +7,15 @@
       src="~/assets/creative/sidewitharrow.png"
       alt=""
     />
-    <ModuleBtnCollection
+
+      <ModuleBtnCollection
       :btnImg="img"
       :btnArray="btnArray"
       :btnStyle="style"
       :btnTitle="title"
       @changeBtns="changeBtns"
       class="all-size flex-center human_capital-btns"
-    ></ModuleBtnCollection>
+      ></ModuleBtnCollection>
   </div>
 </template>
 
