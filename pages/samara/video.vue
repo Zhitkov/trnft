@@ -3,6 +3,7 @@
     <!-- style="display: none" -->
     {{ samara.start }}
     {{samaraVideos}}
+    ssssssssssss{{samara.idle}}
     <div v-for="(video, index) in samaraVideos" :key="index+'1'">
       <v-idle
         @idle="CHANGE_BY_PATH(['samara.idle', true])"

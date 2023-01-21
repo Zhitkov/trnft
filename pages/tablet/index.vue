@@ -61,7 +61,7 @@ import { mapGetters, mapMutations } from 'vuex'
 export default {
   data() {
     return {
-      img: 'btnwitharrow',
+      img: 'rbbtn',//btnwitharrow
       array: [],
       style: 'oddBtns',
       title: '',
@@ -106,9 +106,9 @@ export default {
         this.style = this.tablet[btn.link].length % 2 ? 'oddBtns' : 'evenBtns'
         this.myBtn = btn.link
       } else {
-        switch (this.myBtn) {
+        switch (btn.link) {
           case 'samaraButtons':
-            if (btn.link === 'start') {
+            if (btn.stage === 'start') {
               this.CHANGE_BY_PATH(['samara.start', true])
               this.CHANGE_BY_PATH(['samara.counter', 1])
               await this.$axios
@@ -124,7 +124,7 @@ export default {
             } else {
               await this.$axios
                 .$post('/api/area_samara/stage/', {
-                  stage: btn.link,
+                  stage: btn.stage,
                 }, )
                 .then(function (response) {
                   console.log(response)
@@ -149,10 +149,30 @@ export default {
               })
             break
           case 'changeScreenPosition':
-            console.log(btn.link, 'alskdfjlsdhfoisehfu');
           await this.$axios
             .$post('/api/technologies/stage/', {
-              stage: btn.link,
+              stage: btn.status,
+            })
+            .then(function (response) {
+              console.log(response)
+            })
+            .catch(function (error) {
+              console.log(error)
+            })
+            break
+          case 'colba':
+          let stream7 = await this.$axios.$get('/api/flows/')
+          .then((response) => {
+            console.log(response, 'response.data')
+            return response.mask.split('')
+          });
+          stream7[btn.colba] = (stream7[btn.colba]=='0'?'1':'0');
+          stream7 = stream7.join('')
+          console.log(btn.colba ,stream7);
+          console.log("не понял");
+          await this.$axios
+            .$post('/api/flows/', {
+              mask: stream7,
             })
             .then(function (response) {
               console.log(response)
@@ -181,6 +201,7 @@ export default {
   position: absolute;
   left: 0;
   top: 40vh;
+  z-index: 10;
   width: 2vw;
 }
 

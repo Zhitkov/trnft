@@ -81,5 +81,6 @@ export default {
   left: 0;
   top: 30vh;
   width: 2.8vw;
+  z-index: 10;
 }
 </style>

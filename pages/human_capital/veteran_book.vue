@@ -16,12 +16,14 @@
             <p>{{ modalInfo.desc }}</p>
             <div style="width: 100%; text-align: center">
               <div @click="modal = false">
+                <!-- btnwitharrow -->
                 <div
-                  class="btnwitharrow"
+                  class="rbbtn"
                   style="
                     background-size: contain;
                     background-repeat: no-repeat;
                     background-position: center center;
+                    animation: none;
                   "
                 >
                   Назад

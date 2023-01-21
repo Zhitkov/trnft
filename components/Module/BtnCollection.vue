@@ -6,7 +6,7 @@
     <h1 v-show="btnTitle" class="title">{{ btnTitle }}</h1>
     <div :class="btnStyle + ' btn-container'">
     <transition-group name="btns" class=" flex-center" style="flex-wrap: wrap;">
-      <div v-for="btn in btnArray"  :key="btn.name">
+      <div class="coolbtn" v-for="btn in btnArray"  :key="btn.name">
         <div :class="btnImg + ' btnsStyle'" @click="changeBtns(btn)">
           <b class="btn-text" v-html="btn.name"></b>
         </div>
@@ -38,15 +38,16 @@ export default {
   display: flex;
   gap: 1%;
   flex-wrap: wrap;
+  z-index: 3;
 }
 .big-logo {
   margin-bottom: 8vh;
   width: 60vw;
-  height: 25vh;
+  /* height: 25vh; */
 }
 .small-logo {
   width: 30vw;
-  height: 15vh;
+  /* height: 15vh; */
 }
 .title {
   border-top: 2px #025692 solid;
@@ -74,9 +75,13 @@ export default {
 .btnwitharrow {
   background-image: url('~/assets/creative/btnwitharrow.png');
 }
+.rbbtn:hover {
+  animation: moveInBottom .5s ease-out;
+}
 .rbbtn {
   background-image: url('~/assets/creative/rbbtn.png');
   color: white;
+  background-position: center center;
 }
 .rbsmbtn {
   background-image: url('~/assets/creative/rbsmbtn.svg');
@@ -87,4 +92,29 @@ export default {
 .evenBtns {
   justify-content: space-around;
 }
+
+
+@keyframes moveInBottom {
+    0% {
+        /* opacity: 0; */
+        background-size: 100% 100%;
+      }
+      
+      50% {
+        background-size: 103% 103%;
+        /* opacity: 1; */
+        /* transform: scaleX(1.4) scaleY(1.6); */
+      }
+      
+      100% {
+        background-size: 100% 100%;
+        /* opacity: 0; */
+        /* transform: scaleX(1) scaleY(1); */
+    }
+}
 </style>
+
+
+
+
+

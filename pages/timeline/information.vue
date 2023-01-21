@@ -1,12 +1,12 @@
 <template>
   <div>
     chosenYear = {{chosenYear}}
-    <div v-for="(video, index) in allYears" :key="index">
-      {{ video.name }}
+    <div v-for="(video, index) in ['1936', '1953', '1961', '1970', '1980s', '1990s', '2000s', '2010s']" :key="index">
+      {{ video }}
       {{ newVideos[index] }}
       <ModuleVideo
       v-show="intro"
-      v-if="video.name === chosenYear"
+      v-if="video === chosenYear"
       :videoSrc="'http://localhost:8000/media/static/timeline/video/headcamp_VVqtVn4.mp4'"
       :loop="false"
       :pause="timeline.pause"
@@ -14,7 +14,7 @@
         ></ModuleVideo>
         <ModuleVideo
         v-show="!intro"
-        v-if="video.name === chosenYear"
+        v-if="video === chosenYear"
         :videoSrc="newVideos[index]"
         :loop="true"
         :pause="timeline.pause"
@@ -62,9 +62,9 @@ export default {
     timeline() {
       return this.byPath('timeline')
     },
-    allYears() {
-      return this.videoByPath('tablet.changeYear')
-    },
+    // allYears() {
+    //   return this.videoByPath('tablet.changeYear')
+    // },
   },
   // mounted() {
   //   this.refreshData()

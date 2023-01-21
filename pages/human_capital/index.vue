@@ -25,7 +25,7 @@ import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
-      img: 'btnwitharrow',
+      img: 'rbbtn',//btnwitharrow
       array: [],
       style: 'oddBtns',
       title: '',
@@ -77,5 +77,6 @@ export default {
   left: 0;
   top: 40vh;
   width: 2vw;
+  z-index: 10;
 }
 </style>

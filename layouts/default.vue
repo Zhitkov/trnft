@@ -98,14 +98,33 @@ opacity: 0;
 } */
 @keyframes bounce-in {
   0% {
-    transform: scale(0);
+    transform: scale(1);
+    /* opacity: 0; */
   }
   50% {
-    transform: scale(1.25);
+    transform: scale(1.1);
+    /* opacity: .7; */
   }
   100% {
+    /* opacity: 1; */
     transform: scale(1);
   }
+}
+
+/* @keyframes opacityGroup {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: .7;
+  }
+  100% {
+    opacity: 1;
+  }
+} */
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 

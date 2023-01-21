@@ -21,50 +21,6 @@ const setByPath = (obj, path, value) => {
 export const plugins = [createCache()]
 
 export const state = () => ({
-  humanCapital: {
-    veterans: [
-      {
-        name: 'Дмитрий Грфович Абзонов',
-        img: require('~/assets/picture/veteran/1.jpg'),
-        desc: 'Aliqua ullamco ad velit exercitation sint elit nulla aliqua irure commodo exercitation incididunt. Proident ipsum consectetur ipsum eiusmod aliqua duis veniam commodo adipisicing. Sint veniam commodo id aute labore pariatur esse ea. Magna sit tempor aliquip nulla esse do minim esse tempor duis cillum dolor consequat dolor. Veniam deserunt sint qui fugiat eiusmod anim id aute. Lorem ullamco sunt cillum ad proident proident qui magna voluptate in consequat duis magna. Ipsum incididunt incididunt consequat dolore et excepteur labore nisi magna elit aliqua nisi.',
-      },
-      {
-        name: 'Армен Григорьев Васильевич',
-        img: require('~/assets/picture/veteran/1.jpg'),
-        desc: 'Aliqua ullamco ad velit exercitation sint elit nulla aliqua irure commodo exercitation incididunt. Proident ipsum consectetur ipsum eiusmod aliqua duis veniam commodo adipisicing. Sint veniam commodo id aute labore pariatur esse ea. Magna sit tempor aliquip nulla esse do minim esse tempor duis cillum dolor consequat dolor. Veniam deserunt sint qui fugiat eiusmod anim id aute. Lorem ullamco sunt cillum ad proident proident qui magna voluptate in consequat duis magna. Ipsum incididunt incididunt consequat dolore et excepteur labore nisi magna elit aliqua nisi.',
-      },
-      {
-        name: 'Александр Васильевич Сталинов',
-        img: require('~/assets/picture/veteran/1.jpg'),
-        desc: 'Aliqua ullamco ad velit exercitation sint elit nulla aliqua irure commodo exercitation incididunt. Proident ipsum consectetur ipsum eiusmod aliqua duis veniam commodo adipisicing. Sint veniam commodo id aute labore pariatur esse ea. Magna sit tempor aliquip nulla esse do minim esse tempor duis cillum dolor consequat dolor. Veniam deserunt sint qui fugiat eiusmod anim id aute. Lorem ullamco sunt cillum ad proident proident qui magna voluptate in consequat duis magna. Ipsum incididunt incididunt consequat dolore et excepteur labore nisi magna elit aliqua nisi.',
-      },
-      {
-        name: 'Василий Примаков Антонович',
-        img: require('~/assets/picture/veteran/1.jpg'),
-        desc: 'Aliqua ullamco ad velit exercitation sint elit nulla aliqua irure commodo exercitation incididunt. Proident ipsum consectetur ipsum eiusmod aliqua duis veniam commodo adipisicing. Sint veniam commodo id aute labore pariatur esse ea. Magna sit tempor aliquip nulla esse do minim esse tempor duis cillum dolor consequat dolor. Veniam deserunt sint qui fugiat eiusmod anim id aute. Lorem ullamco sunt cillum ad proident proident qui magna voluptate in consequat duis magna. Ipsum incididunt incididunt consequat dolore et excepteur labore nisi magna elit aliqua nisi.',
-      },
-      {
-        name: 'Анатолий Васильев Александрович',
-        img: require('~/assets/picture/veteran/1.jpg'),
-        desc: 'Aliqua ullamco ad velit exercitation sint elit nulla aliqua irure commodo exercitation incididunt. Proident ipsum consectetur ipsum eiusmod aliqua duis veniam commodo adipisicing. Sint veniam commodo id aute labore pariatur esse ea. Magna sit tempor aliquip nulla esse do minim esse tempor duis cillum dolor consequat dolor. Veniam deserunt sint qui fugiat eiusmod anim id aute. Lorem ullamco sunt cillum ad proident proident qui magna voluptate in consequat duis magna. Ipsum incididunt incididunt consequat dolore et excepteur labore nisi magna elit aliqua nisi.',
-      },
-      {
-        name: 'Владимир Раменский Вазгенович',
-        img: require('~/assets/picture/veteran/1.jpg'),
-        desc: 'Aliqua ullamco ad velit exercitation sint elit nulla aliqua irure commodo exercitation incididunt. Proident ipsum consectetur ipsum eiusmod aliqua duis veniam commodo adipisicing. Sint veniam commodo id aute labore pariatur esse ea. Magna sit tempor aliquip nulla esse do minim esse tempor duis cillum dolor consequat dolor. Veniam deserunt sint qui fugiat eiusmod anim id aute. Lorem ullamco sunt cillum ad proident proident qui magna voluptate in consequat duis magna. Ipsum incididunt incididunt consequat dolore et excepteur labore nisi magna elit aliqua nisi.',
-      },
-      {
-        name: 'Роман Калинов Романович',
-        img: require('~/assets/picture/veteran/1.jpg'),
-        desc: 'Aliqua ullamco ad velit exercitation sint elit nulla aliqua irure commodo exercitation incididunt. Proident ipsum consectetur ipsum eiusmod aliqua duis veniam commodo adipisicing. Sint veniam commodo id aute labore pariatur esse ea. Magna sit tempor aliquip nulla esse do minim esse tempor duis cillum dolor consequat dolor. Veniam deserunt sint qui fugiat eiusmod anim id aute. Lorem ullamco sunt cillum ad proident proident qui magna voluptate in consequat duis magna. Ipsum incididunt incididunt consequat dolore et excepteur labore nisi magna elit aliqua nisi.',
-      },
-      {
-        name: 'Сидр Сидорович Сидоров',
-        img: require('~/assets/picture/veteran/1.jpg'),
-        desc: 'Aliqua ullamco ad velit exercitation sint elit nulla aliqua irure commodo exercitation incididunt. Proident ipsum consectetur ipsum eiusmod aliqua duis veniam commodo adipisicing. Sint veniam commodo id aute labore pariatur esse ea. Magna sit tempor aliquip nulla esse do minim esse tempor duis cillum dolor consequat dolor. Veniam deserunt sint qui fugiat eiusmod anim id aute. Lorem ullamco sunt cillum ad proident proident qui magna voluptate in consequat duis magna. Ipsum incididunt incididunt consequat dolore et excepteur labore nisi magna elit aliqua nisi.',
-      },
-    ],
-  },
   samara: {
     map: require('~/assets/picture/samara/map.png'),
     counter: 0,
@@ -74,10 +30,34 @@ export const state = () => ({
   technology: {
     period: 'past',
     models: [
-      importAll(require.context('/static/models/GCNA_jpg/', false, /.*\.jpg$/)),
-      importAll(require.context('/static/models/PM_jpg/', false, /.*\.jpg$/)),
-      importAll(require.context('/static/models/PVM_jpg/', false, /.*\.jpg$/)),
-      importAll(require.context('/static/models/RZM_jpg/', false, /.*\.jpg$/)),
+      {
+        model: 0,
+        desc: 'Minim laborum ipsum ut aliquip velit. Sunt adipisicing ad sunt sit officia dolore excepteur irure voluptate fugiat laborum veniam. Consectetur tempor pariatur dolor deserunt consequat.',
+        link: 'model_controller',
+        name: 'Устроийство для безогневой резки труб',
+        jpgs: importAll(require.context('/static/models/PUIPG/', false, /.*\.jpg$/)),
+      },
+      {
+        model: 1,
+        desc: 'Minim laborum ipsum ut aliquip velit. Sunt adipisicing ad sunt sit officia dolore excepteur irure voluptate fugiat laborum veniam. Consectetur tempor pariatur dolor deserunt consequat.',
+        link: 'model_controller',
+        name: 'Установка для плоскосворачиваемого рукава',
+        jpgs: importAll(require.context('/static/models/TPGS/', false, /.*\.jpg$/)),
+      },
+      {
+        model: 2,
+        desc: 'Minim laborum ipsum ut aliquip velit. Sunt adipisicing ad sunt sit officia dolore excepteur irure voluptate fugiat laborum veniam. Consectetur tempor pariatur dolor deserunt consequat.',
+        link: 'model_controller',
+        name: 'Установка ледорезная',
+        jpgs: importAll(require.context('/static/models/UL/', false, /.*\.jpg$/)),
+      },
+      {
+        model: 3,
+        desc: 'Minim laborum ipsum ut aliquip velit. Sunt adipisicing ad sunt sit officia dolore excepteur irure voluptate fugiat laborum veniam. Consectetur tempor pariatur dolor deserunt consequat.',
+        link: 'model_controller',
+        name: 'Герметизирующее устройство для вантуза трубопровода',
+        jpgs: importAll(require.context('/static/models/PUIPG/', false, /.*\.jpg$/)),
+      },
     ],
   },
   smallTablet: {

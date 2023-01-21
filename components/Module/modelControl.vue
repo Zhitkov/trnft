@@ -6,7 +6,7 @@
           <Vue360Spinner
             :reverse="true"
             @changeCurrent="changeModelValue"
-            :images="models[index]"
+            :images="models[index].jpgs"
           >
             <p>Грузиться</p>
           </Vue360Spinner>

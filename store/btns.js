@@ -17,6 +17,47 @@ export const state = () => ({
         link: 'timeline',
         name: 'Таймлайн',
       },
+      {
+        link: 'stream7',
+        name: '7 потоков нефти',
+      },
+    ],
+    stream7: [
+      {
+        link: 'colba',
+        colba: 0,
+        name: 'Первая колба',
+      },
+      {
+        link: 'colba',
+        colba: 1,
+        name: 'Вторая колба',
+      },
+      {
+        link: 'colba',
+        colba: 2,
+        name: 'Третья колба',
+      },
+      {
+        link: 'colba',
+        colba: 3,
+        name: 'Четвертая колба',
+      },
+      {
+        link: 'colba',
+        colba: 4,
+        name: 'Пятая колба',
+      },
+      {
+        link: 'colba',
+        colba: 5,
+        name: 'Шестая колба',
+      },
+      {
+        link: 'colba',
+        colba: 6,
+        name: 'Седьмая колба',
+      },
     ],
     humanCapital: [
       {
@@ -46,23 +87,28 @@ export const state = () => ({
     ],
     samara: [
         {
-          link: 1,
+          link: 'samaraButtons',
+          stage: 1,
           name: 'Этап 1',
         },
         {
-          link: 2,
+          link: 'samaraButtons',
+          stage: 2,
           name: 'Этап 2',
         },
         {
-          link: 3,
+          link: 'samaraButtons',
+          stage: 3,
           name: 'Этап 3',
         },
         {
-          link: 4,
+          link: 'samaraButtons',
+          stage: 4,
           name: 'Этап 4',
         },
         {
-          link: 'start',
+          link: 'samaraButtons',
+          stage: 'start',
           name: 'Пуск',
         },
       ],
@@ -75,19 +121,23 @@ export const state = () => ({
     // ],
     technology: [
         {
-          link: 'past',
+          status: 'past',
+          link: 'changeScreenPosition',
           name: 'Прошлое',
         },
         {
-          link: 'present',
+          status: 'present',
+          link: 'changeScreenPosition',
           name: 'Настоящее',
         },
         {
-          link: 'present2',
+          status: 'present2',
+          link: 'changeScreenPosition',
           name: 'Настоящее 2',
         },
         {
-          link: 'future',
+          status: 'future',
+          link: 'changeScreenPosition',
           name: 'Будущее',
         },
       ],
@@ -100,27 +150,35 @@ export const state = () => ({
     // ],
     timeline: [
         {
+          link: 'changeYear',
           name: '1936',
         },
         {
+          link: 'changeYear',
           name: '1953',
         },
         {
+          link: 'changeYear',
           name: '1961',
         },
         {
+          link: 'changeYear',
           name: '1970',
         },
         {
+          link: 'changeYear',
           name: '1980s',
         },
         {
+          link: 'changeYear',
           name: '1990s',
         },
         {
+          link: 'changeYear',
           name: '2000s',
         },
         {
+          link: 'changeYear',
           name: '2010s',
         }
       ],
@@ -136,27 +194,23 @@ export const state = () => ({
     main: [
       {
         model: 0,
-        desc: 'Minim laborum ipsum ut aliquip velit. Sunt adipisicing ad sunt sit officia dolore excepteur irure voluptate fugiat laborum veniam. Consectetur tempor pariatur dolor deserunt consequat.',
         link: 'model_controller',
         name: 'УСТРОИЙСТВО ДЛЯ БЕЗОГНЕВОЙ РЕЗКИ ТРУБ',
       },
       {
         model: 1,
-        desc: 'Minim laborum ipsum ut aliquip velit. Sunt adipisicing ad sunt sit officia dolore excepteur irure voluptate fugiat laborum veniam. Consectetur tempor pariatur dolor deserunt consequat.',
         link: 'model_controller',
         name: 'УСТАНОВКА ДЛЯ <BR> ПЛОСКОСВОРАЧИВАЕМОГО РУКАВА',
       },
       {
         model: 2,
-        desc: 'Minim laborum ipsum ut aliquip velit. Sunt adipisicing ad sunt sit officia dolore excepteur irure voluptate fugiat laborum veniam. Consectetur tempor pariatur dolor deserunt consequat.',
         link: 'model_controller',
-        name: 'ГЕРМЕТИЗИРУЮЩЕЕ УСТРОЙСТВО ДЛЯ <BR> ВАНТУЗА ТРУБОПРОВОДА',
+        name: 'УСТАНОВКА ЛЕДОРЕЗНАЯ',
       },
       {
         model: 3,
-        desc: 'Minim laborum ipsum ut aliquip velit. Sunt adipisicing ad sunt sit officia dolore excepteur irure voluptate fugiat laborum veniam. Consectetur tempor pariatur dolor deserunt consequat.',
         link: 'model_controller',
-        name: 'УСТАНОВКА ЛЕДОРЕЗНАЯ',
+        name: 'ГЕРМЕТИЗИРУЮЩЕЕ УСТРОЙСТВО ДЛЯ <BR> ВАНТУЗА ТРУБОПРОВОДА',
       },
     ],
   },

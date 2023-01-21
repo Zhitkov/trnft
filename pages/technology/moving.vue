@@ -19,13 +19,15 @@
             <img src="~/assets/picture/logo.png" alt="" />
           </div>
           <div class="carousel-items">
-            <img
+            <transition-group tag="div" name="half">
+              <img
               :key="item + '1'"
               v-for="item in 5"
               v-show="carouselIndex === item"
               :src="require('/assets/picture/carousel/' + item + '.png')"
               alt=""
-            />
+              />
+            </transition-group>
           </div>
           <div class="control-elements">
             <div @click="carouselChange(-1)" class="arrow-back">
@@ -54,19 +56,29 @@
             </div>
           </div>
         </div>
-          <div class="all-screen" v-show="modelIndex !== null">
-            <div class="all-size" v-show="index === modelIndex" v-for="index in 3" :key="index">
-              <div class="all-size" >
-                <Vue360Spinner
-                  :reverse="true"
-                  :images="models[index]"
-                  :remove360="true"
-                >
-                  <p>Грузиться</p>
-                </Vue360Spinner>
-              </div>
+        <div class="carousel all-screen" v-show="modelIndex !== null">
+          <div class="logo-place">
+            <img src="~/assets/picture/logo.png" alt="" />
+          </div>
+          <div
+            class="carousel-items all-size"
+            v-show="index === modelIndex"
+            v-for="(model, index) in models"
+            :key="index"
+          >
+          <div class="control-elements all-size">
+            <div class="">{{model.name}}</div>
+            <div class="">{{model.desc}}</div>
+              <Vue360Spinner
+                :reverse="true"
+                :images="models[index].jpgs"
+                :remove360="true"
+              >
+                <p>Грузиться</p>
+              </Vue360Spinner>
             </div>
           </div>
+        </div>
       </div>
     </div>
   </div>
@@ -193,8 +205,6 @@ export default {
 </script>
 
 <style>
-
-
 .future-moving-screen {
   /* padding: 10vh 0; */
   height: 80vh;
@@ -211,7 +221,7 @@ export default {
   width: 100%;
 }
 .future-moving-screen > .carousel > .logo-place > img {
-  width: 80%;
+  width: 70%;
   display: flex;
   justify-self: center;
   align-self: center;
@@ -226,7 +236,7 @@ export default {
   justify-content: center;
   /* padding: 10% 0%; */
 }
-.future-moving-screen > .carousel > div > img {
+.future-moving-screen > .carousel > div > div > img {
   padding: 10% 0%;
   width: 80%;
   height: 80%;
