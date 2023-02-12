@@ -14,20 +14,18 @@
       v-show="stage === 'future'"
     >
       <div class="future-moving-screen flex-center">
-        <div class="carousel" v-show="modelIndex === null">
+        <div class="carousel" style="justify-content: space-between;" v-show="modelIndex === null">
           <div class="logo-place">
             <img src="~/assets/picture/logo.png" alt="" />
           </div>
           <div class="carousel-items">
-            <transition-group tag="div" name="half">
-              <img
+            <img
               :key="item + '1'"
               v-for="item in 5"
               v-show="carouselIndex === item"
               :src="require('/assets/picture/carousel/' + item + '.png')"
               alt=""
-              />
-            </transition-group>
+            />
           </div>
           <div class="control-elements">
             <div @click="carouselChange(-1)" class="arrow-back">
@@ -56,8 +54,8 @@
             </div>
           </div>
         </div>
-        <div class="carousel all-screen" v-show="modelIndex !== null">
-          <div class="logo-place">
+        <div class="carousel all-screen" style="justify-content: center;" v-show="modelIndex !== null">
+          <div class="logo-place" style="padding-bottom: 15vh;">
             <img src="~/assets/picture/logo.png" alt="" />
           </div>
           <div
@@ -66,9 +64,9 @@
             v-for="(model, index) in models"
             :key="index"
           >
-          <div class="control-elements all-size">
-            <div class="">{{model.name}}</div>
-            <div class="">{{model.desc}}</div>
+            <div class="text-elements all-size">
+              <div class="name">{{ model.name }}</div>
+              <div class="desc">{{ model.desc }}</div>
               <Vue360Spinner
                 :reverse="true"
                 :images="models[index].jpgs"
@@ -207,28 +205,31 @@ export default {
 <style>
 .future-moving-screen {
   /* padding: 10vh 0; */
+  height: 80%;
+}
+.future-moving-screen > .carousel {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
   height: 80vh;
+  /* margin: 10vh auto auto auto; */
 }
 .future-moving-screen > .carousel > .logo-place {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-}
-.future-moving-screen > .carousel > .logo-place {
-  display: flex;
-  justify-content: center;
   align-content: center;
   width: 100%;
 }
 .future-moving-screen > .carousel > .logo-place > img {
-  width: 70%;
+  width: 50%;
   display: flex;
   justify-self: center;
   align-self: center;
 }
 
 .future-moving-screen > .carousel > .carousel-items {
-  height: 80%;
+  height: 40%;
   display: flex;
 }
 .future-moving-screen > .carousel > div {
@@ -243,14 +244,25 @@ export default {
 }
 .future-moving-screen > .carousel > .control-elements {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   height: 10%;
+  justify-content: center;
 }
 .future-moving-screen > .carousel > .control-elements > div {
   width: 10%;
 }
 .future-moving-screen > .carousel > .control-elements > div > img {
-  width: 100%;
+  width: 60%;
+}
+
+.text-elements > .name {
+  font-size: 180%;
+    font-weight: 800;
+    text-align: center;
+    padding-bottom: 30px;
+}
+.text-elements > .desc {
+  margin: auto 50px;
 }
 </style>

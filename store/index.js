@@ -34,7 +34,7 @@ export const state = () => ({
         model: 0,
         desc: 'Minim laborum ipsum ut aliquip velit. Sunt adipisicing ad sunt sit officia dolore excepteur irure voluptate fugiat laborum veniam. Consectetur tempor pariatur dolor deserunt consequat.',
         link: 'model_controller',
-        name: 'Устроийство для безогневой резки труб',
+        name: 'Устройство для безогневой резки труб',
         jpgs: importAll(require.context('/static/models/PUIPG/', false, /.*\.jpg$/)),
       },
       {
