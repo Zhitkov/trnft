@@ -2,11 +2,16 @@ const BASE_URL = 'http://localhost:8000'; //TODO move to .env
 
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
+  router: {
+    base: './'
+  },
+  // build: {
+  //   publicPath: '/_nuxt/'
+  // },
   ssr: false,
   env: {
     BASE_URL: BASE_URL
   },
-
   server: {
     host: '0.0.0.0'
   },
